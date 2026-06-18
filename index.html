@@ -146,7 +146,33 @@ details .inner{padding:0 16px 16px}
 .tlt{font-weight:800;color:var(--hd);font-size:13px;padding-top:1px}
 .tle{font-size:13px;color:var(--text);padding-bottom:9px;border-bottom:1px solid var(--border)}
 .tle:last-child{border-bottom:none}
-.fbar{display:flex;gap:6px;flex-wrap:wrap;position:sticky;top:53px;z-index:30;background:var(--bg);padding:10px 0;margin-bottom:6px}
+.fbar{display:flex;gap:6px;flex-wrap:wrap;padding:0 0 4px;margin:0}
+.stickybar{position:sticky;top:52px;z-index:30;background:var(--bg);padding:10px 0;margin-bottom:8px;box-shadow:0 8px 8px -8px rgba(0,0,0,.14)}
+.subnav{display:flex;gap:5px;background:var(--card);border:1px solid var(--border);border-radius:999px;padding:5px;overflow-x:auto;scrollbar-width:none;box-shadow:var(--sh)}
+.subnav::-webkit-scrollbar{display:none}
+.subnav button{flex:1;min-width:fit-content;white-space:nowrap;border:none;background:transparent;color:var(--muted);font-weight:700;font-size:13px;padding:9px 15px;border-radius:999px;cursor:pointer;font-family:inherit;transition:all .15s}
+.subnav button:hover{color:var(--hd)}
+.subnav button.active{background:var(--navy);color:#fff}
+.subview{display:none}.subview.active{display:block;animation:fade .22s ease}
+.rhero{background:linear-gradient(135deg,#0d2137 0%,#0d7a6e 65%,#0284c7 120%);border-radius:var(--r);padding:22px;color:#fff;box-shadow:var(--sh2);margin-bottom:16px}
+.rhero .rname{font-size:23px;font-weight:800;letter-spacing:-.02em}
+.rhero .rloc{font-size:13px;opacity:.9;margin-top:3px;display:flex;align-items:center;gap:6px}
+.statrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.stat{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:9px 15px;min-width:74px}
+.stat b{display:block;font-size:19px;font-weight:800;line-height:1.1}
+.stat span{font-size:10px;text-transform:uppercase;letter-spacing:.07em;opacity:.85;font-weight:700}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.dcard{border:1px solid var(--border);border-radius:var(--r);padding:15px;background:var(--card);box-shadow:var(--sh);display:flex;flex-direction:column}
+.dcard .dname{font-size:15px;font-weight:800;color:var(--hd)}
+.dcard .dhours{font-size:12px;color:var(--muted);margin-top:7px;display:flex;align-items:center;gap:5px}
+.dcard .dnote{font-size:12px;color:var(--text);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+.poolcard{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
+.poolcard:last-child{border-bottom:none}
+.poolnum{width:36px;height:36px;border-radius:10px;background:var(--info-bg);color:var(--info);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
+.roomcat{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.roomcat:last-child{border-bottom:none}
+.roomcat .rc-name{font-weight:600;color:var(--text)}
+.roomcat .rc-spec{color:var(--muted);text-align:right}
 .fbar button{padding:7px 13px;border-radius:999px;border:1px solid var(--border);background:var(--card);font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s;font-family:inherit}
 .fbar button.active,.fbar button:hover{background:var(--navy);color:#fff;border-color:var(--hd)}
 .dog-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:15px;box-shadow:var(--sh);margin-bottom:10px}
@@ -354,112 +380,180 @@ a:hover{text-decoration:underline}
     <!-- PACKING -->
     <section class="page" id="packing">
       <div class="sectitle">Packing hub</div>
-      <div class="g c5 mb18">
+      <div class="g c5 mb14">
         <div class="card kpi accent-blue"><div class="kl">Overall packed</div><div class="kv" id="m_overall">0%</div><div class="ptrack"><div class="pfill" id="m_overallBar" style="width:0%"></div></div></div>
         <div class="card kpi"><div class="kl">Packed items</div><div class="kv" id="m_packed">0/0</div></div>
         <div class="card kpi accent-amber"><div class="kl">Outstanding</div><div class="kv" id="m_outstanding">0</div></div>
         <div class="card kpi accent-red"><div class="kl">Shopping open</div><div class="kv" id="m_shopopen">0</div><div class="ks">essential</div></div>
         <div class="card kpi"><div class="kl">Trip count</div><div class="kv">6N / 7D</div><div class="ks">5 resort days</div></div>
       </div>
-      <details open class="mb14">
-        <summary>Shopping tracker</summary>
-        <div class="inner">
-          <div class="tw"><table><thead><tr><th>Item</th><th>Qty</th><th>Owner</th><th>Status</th><th>Ordered</th><th>Delivered</th><th>Packed</th><th>Notes</th><th></th></tr></thead><tbody id="shopRows"></tbody></table></div>
-          <button class="btn sm" style="margin-top:10px" onclick="collectAll();data.shopping.push(['','1','Danielle','Maybe',false,false,false,'']);renderAll()">+ Add item</button>
+
+      <div class="stickybar">
+        <div class="subnav">
+          <button class="active" onclick="subView('pack','list',this)">🧳 Packing list</button>
+          <button onclick="subView('pack','shop',this)">🛒 Shopping <span class="pill bad" id="shopBadge" style="margin-left:4px;padding:1px 7px">0</span></button>
         </div>
-      </details>
-      <div class="fbar">
-        <button class="active" onclick="filterPacking('all',this)">All</button>
-        <button onclick="filterPacking('adults',this)">Adults</button>
-        <button onclick="filterPacking('kids',this)">Kids</button>
-        <button onclick="filterPacking('pool',this)">Pool + Beach</button>
-        <button onclick="filterPacking('toiletries',this)">Toiletries</button>
-        <button onclick="filterPacking('travel',this)">Travel day</button>
-        <button onclick="filterPacking('room',this)">Room setup</button>
-        <button onclick="showOutstandingOnly(this)" style="background:var(--warn-bg);color:var(--warn);border-color:var(--warn)">Outstanding only</button>
-        <button onclick="expandAll()" style="margin-left:auto">Expand all</button>
-        <button onclick="collapseAll()">Collapse all</button>
+        <div id="packFilters" class="fbar" style="margin-top:8px">
+          <button class="active" onclick="filterPacking('all',this)">All</button>
+          <button onclick="filterPacking('adults',this)">Adults</button>
+          <button onclick="filterPacking('kids',this)">Kids</button>
+          <button onclick="filterPacking('pool',this)">Pool + Beach</button>
+          <button onclick="filterPacking('toiletries',this)">Toiletries</button>
+          <button onclick="filterPacking('travel',this)">Travel day</button>
+          <button onclick="filterPacking('room',this)">Room setup</button>
+          <button onclick="showOutstandingOnly(this)" style="background:var(--warn-bg);color:var(--warn);border-color:var(--warn)">Outstanding only</button>
+          <button onclick="expandAll()" style="margin-left:auto">Expand all</button>
+          <button onclick="collapseAll()">Collapse all</button>
+        </div>
       </div>
-      <div id="personCards" style="margin-bottom:14px"></div>
-      <div id="sharedSections"></div>
+
+      <div class="subview active" data-sub="pack" data-name="list">
+        <div id="personCards" style="margin-bottom:14px"></div>
+        <div id="sharedSections"></div>
+      </div>
+
+      <div class="subview" data-sub="pack" data-name="shop">
+        <div class="card">
+          <div class="sh"><div class="ctitle" style="margin:0">Shopping tracker</div><button class="btn sm" onclick="collectAll();data.shopping.push(['','1','Danielle','Maybe',false,false,false,'']);renderAll()">+ Add item</button></div>
+          <div class="tw"><table><thead><tr><th>Item</th><th>Qty</th><th>Owner</th><th>Status</th><th>Ordered</th><th>Delivered</th><th>Packed</th><th>Notes</th><th></th></tr></thead><tbody id="shopRows"></tbody></table></div>
+        </div>
+      </div>
     </section>
 
     <!-- RESORT OPS -->
     <section class="page" id="resort">
-      <div class="sectitle">Resort operations</div>
-      <div class="g c2 mb14">
-        <div class="card">
-          <div class="ctitle">Contact + address</div>
-          <div class="kv-row"><span class="k">Resort</span><span class="v">Garza Blanca Los Cabos</span></div>
-          <div class="kv-row"><span class="k">Phone</span><span class="v">+52 624 105 4460</span></div>
-          <div class="kv-row"><span class="k">Toll free</span><span class="v">1 800 931 6023</span></div>
-          <div class="kv-row"><span class="k">Address</span><span class="v" style="max-width:60%">Carretera Transpeninsular Km. 17.5, Cabo San Lucas, BCS 23405</span></div>
+      <div class="rhero">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap">
+          <div>
+            <div class="rname">Garza Blanca Resort &amp; Spa</div>
+            <div class="rloc">📍 Carretera Transpeninsular Km. 17.5 · Cabo San Lucas, BCS</div>
+          </div>
+          <a class="btn" href="https://www.garzablancaresort.com/los-cabos" target="_blank" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:#fff">Official site ↗</a>
         </div>
-        <div class="card">
-          <div class="ctitle">All-inclusive notes</div>
-          <p style="font-size:13px;color:var(--text)">Includes dining, drinks, 24-hr room service, activities, Wi-Fi, concierge, taxes/fees.</p>
-          <p style="font-size:12px;color:var(--muted);margin-top:6px">Premium dishes, wine/liquor bottles, select culinary events, and spa are add-ons or discounted — not a default free-for-all.</p>
-        </div>
-      </div>
-
-      <div class="card mb14">
-        <div class="ctitle">Ask at arrival</div>
-        <div class="g c2">
-          <div class="kv-row"><span class="k">Kids Club</span><span class="v">Daily schedule + signup</span></div>
-          <div class="kv-row"><span class="k">Dining</span><span class="v">Reservations? Kids menu?</span></div>
-          <div class="kv-row"><span class="k">Rooms</span><span class="v">Numbers / proximity / keys</span></div>
-          <div class="kv-row"><span class="k">Pool</span><span class="v">Best kid pool / towels / cabanas</span></div>
+        <div class="statrow">
+          <div class="stat"><b>All-incl.</b><span>plan</span></div>
+          <div class="stat"><b>8</b><span>pools</span></div>
+          <div class="stat"><b>4</b><span>towers</span></div>
+          <div class="stat"><b>10</b><span>venues</span></div>
+          <div class="stat"><b>4–12</b><span>kids club</span></div>
+          <div class="stat"><b>6</b><span>nights</span></div>
         </div>
       </div>
 
-      <div class="card mb14"><div class="ctitle">Dining — no click-through needed</div><div id="foodDash"></div></div>
-
-      <div class="g c2 mb14">
-        <div class="card"><div class="ctitle">Weather Jun 27 – Jul 3</div><div class="wgrid" id="weatherGrid"></div><p style="font-size:11px;color:var(--muted);margin-top:8px">Pool-first, sun-heavy pattern. Extreme UV — hats, rash guards, sunscreen. Warm lows; light layers only.</p></div>
-        <div class="card"><div class="ctitle">Pool system &amp; tote</div>
-          <div style="font-size:13px;color:var(--text);margin-bottom:8px">8 pools — Kids #2, Family #6, Main #4, Relaxing #3, Panoramic/Infinity #7 &amp; #8. Beach available but surf can be real, so pool is default with kids.</div>
-          <div class="tw"><table><thead><tr><th>Pool tote item</th><th>Qty</th><th>Packed</th></tr></thead><tbody id="poolToteRows"></tbody></table></div>
+      <div class="stickybar">
+        <div class="subnav">
+          <button class="active" onclick="subView('resort','overview',this)">Overview</button>
+          <button onclick="subView('resort','dining',this)">Dining</button>
+          <button onclick="subView('resort','pools',this)">Pools &amp; beach</button>
+          <button onclick="subView('resort','kids',this)">Kids Club</button>
+          <button onclick="subView('resort','rooms',this)">Rooms &amp; setup</button>
         </div>
       </div>
 
-      <div class="g c2 mb14">
-        <div class="card"><div class="ctitle">Kids Club + activity menu</div>
-          <div class="kv-row"><span class="k">Hours</span><span class="v">9:00 AM – 5:00 PM</span></div>
-          <div class="kv-row"><span class="k">Ages</span><span class="v">4–12</span></div>
-          <div class="kv-row"><span class="k">Supervision</span><span class="v">Certified bilingual staff</span></div>
-          <div class="kv-row"><span class="k">Under 4 / after hours</span><span class="v">Paid babysitting — confirm</span></div>
-          <div style="margin-top:10px"><div class="ctitle">Activity matrix</div><div class="chips" id="kidsMatrix"></div></div>
+      <!-- Overview -->
+      <div class="subview active" data-sub="resort" data-name="overview">
+        <div class="g c2 mb14">
+          <div class="card">
+            <div class="ctitle">Contact</div>
+            <div class="kv-row"><span class="k">Phone</span><span class="v"><a href="tel:+526241054460">+52 624 105 4460</a></span></div>
+            <div class="kv-row"><span class="k">Toll free</span><span class="v">1 800 931 6023</span></div>
+            <div class="kv-row"><span class="k">Address</span><span class="v" style="max-width:62%">Carretera Transpeninsular Km. 17.5, Cabo San Lucas, BCS 23405</span></div>
+            <div class="kv-row"><span class="k">Directions</span><span class="v"><a href="https://www.google.com/maps/search/?api=1&query=Garza+Blanca+Resort+Spa+Los+Cabos" target="_blank">Open in Maps ↗</a></span></div>
+          </div>
+          <div class="card">
+            <div class="ctitle">All-inclusive — what's covered</div>
+            <p style="font-size:13px;color:var(--text)">Dining, drinks, 24-hr room service, activities, Wi-Fi, concierge, taxes &amp; fees.</p>
+            <p style="font-size:12px;color:var(--muted);margin-top:6px">Premium dishes, wine/liquor bottles, select culinary events &amp; Spa Imagine are add-ons or discounted — not free-for-all.</p>
+          </div>
         </div>
-        <div class="card"><div class="ctitle">Facilities by floor</div>
-          <div class="kv-row"><span class="k">Lobby</span><span class="v">Floor 5</span></div>
-          <div class="kv-row"><span class="k">Kids Club</span><span class="v">Floor 2</span></div>
-          <div class="kv-row"><span class="k">Medical center</span><span class="v">Floor 2</span></div>
-          <div class="kv-row"><span class="k">Fitness center</span><span class="v">Floor 6</span></div>
-          <div class="kv-row"><span class="k">Spa</span><span class="v">Floor 9</span></div>
-          <div class="kv-row"><span class="k">Hospitality room</span><span class="v">Floor 6</span></div>
-          <div style="margin-top:8px"><div class="ctitle">Tower room ranges</div>
+
+        <div class="card mb14">
+          <div class="ctitle">Ask at arrival</div>
+          <div class="g c2">
+            <div class="kv-row"><span class="k">Kids Club</span><span class="v">Daily schedule + signup</span></div>
+            <div class="kv-row"><span class="k">Dining</span><span class="v">Reservations? Kids menu?</span></div>
+            <div class="kv-row"><span class="k">Rooms</span><span class="v">Numbers / proximity / keys</span></div>
+            <div class="kv-row"><span class="k">Pool</span><span class="v">Best kid pool / towels / cabanas</span></div>
+          </div>
+        </div>
+
+        <div class="g c2 mb14">
+          <div class="card"><div class="ctitle">Weather Jun 27 – Jul 3</div><div class="wgrid" id="weatherGrid"></div><p style="font-size:11px;color:var(--muted);margin-top:8px">Pool-first, sun-heavy pattern. Extreme UV — hats, rash guards, sunscreen. Warm lows; light layers only.</p></div>
+          <div class="card"><div class="ctitle">Facilities &amp; amenities</div>
+            <div class="kv-row"><span class="k">Lobby</span><span class="v">Floor 5</span></div>
+            <div class="kv-row"><span class="k">Kids Club</span><span class="v">Floor 2</span></div>
+            <div class="kv-row"><span class="k">Medical center</span><span class="v">Floor 2</span></div>
+            <div class="kv-row"><span class="k">The Gym (fitness)</span><span class="v">Floor 6</span></div>
+            <div class="kv-row"><span class="k">Spa Imagine</span><span class="v">Floor 9</span></div>
+            <div class="kv-row"><span class="k">Hospitality room</span><span class="v">Floor 6</span></div>
+            <p style="font-size:11px;color:var(--muted);margin-top:8px">Spa Imagine: hydrotherapy, HydraFacial &amp; premium treatments (book ahead, add-on). "Little Luxuries" family program runs activities through the week.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dining -->
+      <div class="subview" data-sub="resort" data-name="dining">
+        <div class="alert info">🍽 All dining is included. Tap a venue for the plan; reservations &amp; kids menus — confirm at arrival.</div>
+        <div class="dgrid" id="diningGrid"></div>
+      </div>
+
+      <!-- Pools & Beach -->
+      <div class="subview" data-sub="resort" data-name="pools">
+        <div class="g c2 mb14">
+          <div class="card"><div class="ctitle">Pool system — 8 pools</div><div id="poolsList"></div>
+            <p style="font-size:11px;color:var(--muted);margin-top:8px">Beach is available but surf can be real — pool stays the default base with kids.</p>
+          </div>
+          <div class="card"><div class="ctitle">Pool tote — pack &amp; go</div>
+            <div class="tw"><table><thead><tr><th>Item</th><th>Qty</th><th>Packed</th></tr></thead><tbody id="poolToteRows"></tbody></table></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kids Club -->
+      <div class="subview" data-sub="resort" data-name="kids">
+        <div class="card mb14"><div class="ctitle">Kids Club</div>
+          <div class="g c2">
+            <div class="kv-row"><span class="k">Hours</span><span class="v">9:00 AM – 5:00 PM</span></div>
+            <div class="kv-row"><span class="k">Ages</span><span class="v">4–12</span></div>
+            <div class="kv-row"><span class="k">Supervision</span><span class="v">Certified bilingual staff</span></div>
+            <div class="kv-row"><span class="k">Under 4 / after hours</span><span class="v">Paid babysitting — confirm</span></div>
+          </div>
+        </div>
+        <div class="card"><div class="ctitle">Activity menu — "Little Luxuries"</div><div class="chips" id="kidsMatrix" style="margin-top:4px"></div></div>
+      </div>
+
+      <!-- Rooms & Setup -->
+      <div class="subview" data-sub="resort" data-name="rooms">
+        <div class="card mb14">
+          <div class="ctitle">Our rooms — breakout</div>
+          <div class="g c3" id="roomBreakout"></div>
+          <div style="margin-top:12px" class="g c3">
+            <div class="alert info" style="margin:0">🛏 Parents / Levon — diapers, wipes, meds, bedtime basics</div>
+            <div class="alert info" style="margin:0">👧 Girls room — brush, hair ties, detangler, toothbrushes</div>
+            <div class="alert info" style="margin:0">🧳 Shared ops — laundry bags, hooks, clothesline, shoe bags</div>
+          </div>
+        </div>
+
+        <div class="g c2 mb14">
+          <div class="card"><div class="ctitle">Tower room ranges</div>
             <div class="kv-row"><span class="k">Tower 1</span><span class="v">201–1027</span></div>
             <div class="kv-row"><span class="k">Tower 2</span><span class="v">229–931</span></div>
             <div class="kv-row"><span class="k">Tower 3</span><span class="v">332–838</span></div>
             <div class="kv-row"><span class="k">Tower 4</span><span class="v">239–1042</span></div>
           </div>
+          <div class="card"><div class="ctitle">Suite types (reference)</div>
+            <div class="roomcat"><span class="rc-name">Junior Suite</span><span class="rc-spec">667 sq ft · sleeps 3</span></div>
+            <div class="roomcat"><span class="rc-name">One Bedroom Suite</span><span class="rc-spec">1,313 sq ft · sleeps 4</span></div>
+            <div class="roomcat"><span class="rc-name">Two Bedroom Suite</span><span class="rc-spec">1,980 sq ft · sleeps 6</span></div>
+            <div class="roomcat"><span class="rc-name">3-Bed Oceanfront Residence</span><span class="rc-spec">butler service</span></div>
+            <div class="roomcat"><span class="rc-name">Lofts &amp; Penthouse</span><span class="rc-spec">3–4 bedroom</span></div>
+          </div>
         </div>
-      </div>
 
-      <div class="card mb14">
-        <div class="ctitle">Room setup &amp; breakout</div>
-        <div class="g c3" id="roomBreakout"></div>
-        <div style="margin-top:10px" class="g c3">
-          <div class="alert info" style="margin:0">🛏 Parents / Levon room — diapers, wipes, meds, bedtime basics</div>
-          <div class="alert info" style="margin:0">👧 Girls room — brush, hair ties, detangler, toothbrushes</div>
-          <div class="alert info" style="margin:0">🧳 Shared ops — laundry bags, hooks, clothesline, shoe bags</div>
+        <div class="card">
+          <div class="sh"><div class="ctitle" style="margin:0">Onsite plans &amp; notes</div><button class="btn sm" onclick="collectAll();data.onsite.push(['','','',false]);renderAll()">+ Add plan / note</button></div>
+          <div class="tw"><table><thead><tr><th>Day / Plan</th><th>Detail</th><th>Owner</th><th>Done</th><th></th></tr></thead><tbody id="onsiteRows"></tbody></table></div>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="ctitle">Onsite plans &amp; notes</div>
-        <div class="tw"><table><thead><tr><th>Day / Plan</th><th>Detail</th><th>Owner</th><th>Done</th><th></th></tr></thead><tbody id="onsiteRows"></tbody></table></div>
-        <button class="btn sm" style="margin-top:10px" onclick="collectAll();data.onsite.push(['','','',false]);renderAll()">+ Add plan / note</button>
       </div>
     </section>
 
@@ -598,8 +692,10 @@ function renderShared(){document.getElementById('sharedSections').innerHTML=Obje
 function markAllShared(sec){collectAll();data.shared[sec].forEach(r=>r[4]=true);renderAll()}
 
 function renderResort(){
-  const rests=[['Blanca Blue','Breakfast + dinner · Mexican','6:30a–12p · 6–10:30p','Best default for easy family meals'],['NOI Terrazza Italiana','Italian · dinner','6–10:30 PM','Likely easiest dinner win for kids'],['Bocados Steak House','Steakhouse · dinner','6–10:30 PM','Good extended-family dinner option'],['Hiroshi','Japanese · dinner','6–10:30 PM','Cleaner/lighter adult option; check kids'],['Food Truck / Pool Food','Lunch default','Verify onsite','Best fit for pool days, low-friction'],['The Market & Deli','Grab-and-go · snacks','7a–10:30p','Room snacks, quick breakfast backup'],['Rooftop Pool & Bar','Adults only (18+)','Pool 12–5p · bar 11a–6p','Save for when kids are handled'],['24-hr Room Service','Emergency plan','24 hours','Tired kids, naps, arrival/departure'],['Swim Up Bar','Pool drinks','Verify onsite','Useful near main pool corridor'],['Lobby Bar','Arrival / waiting · Floor 5','Verify onsite','During check-in or lobby waits']];
-  document.getElementById('foodDash').innerHTML=rests.map(r=>`<div class="rest"><div style="flex:1"><b>${r[0]}</b><div class="rest-meta"><span class="pill neutral">${r[1]}</span><span style="font-size:12px;color:var(--muted)">${r[2]}</span></div></div><div style="font-size:12px;color:var(--muted);max-width:200px;text-align:right">${r[3]}</div></div>`).join('');
+  const rests=[['Blanca Blue','Mexican · breakfast + dinner','6:30a–12p · 6–10:30p','Best default for easy family meals','ok'],['NOI Terrazza Italiana','Italian · dinner','6–10:30 PM','Likely the easiest dinner win for kids','info'],['Bocados Steak House','Steakhouse · dinner','6–10:30 PM','Good extended-family dinner option','info'],['Hiroshi','Japanese · dinner','6–10:30 PM','Cleaner/lighter adult option; check kids','info'],['Food Truck / Pool','Lunch default','Verify onsite','Best fit for pool days, low friction','warn'],['The Snack / Market','Grab-and-go · snacks','7a–10:30p','Room snacks + quick breakfast backup','neutral'],['The Rooftop Pool & Bar','Adults only · 18+','Pool 12–5p · bar 11a–6p','Save for when kids are handled','neutral'],['24-hr Room Service','Anytime','24 hours','Tired kids, naps, arrival/departure','ok'],['Swim Up Bar','Pool drinks','Verify onsite','Useful near the main pool corridor','neutral'],['Lobby Bar','Arrival / waiting · Floor 5','Verify onsite','During check-in or lobby waits','neutral']];
+  const dg=document.getElementById('diningGrid');if(dg)dg.innerHTML=rests.map(r=>`<div class="dcard"><div class="dname">${r[0]}</div><div style="margin-top:6px"><span class="pill ${r[4]}">${r[1]}</span></div><div class="dhours">🕐 ${r[2]}</div><div class="dnote">${r[3]}</div></div>`).join('');
+  const pools=[['2','Kids Pool','Near central pool zone — default with kids'],['6','Family Pool','Main family swimming'],['4','Main Pool','Central resort pool'],['3','Relaxing Pool','Quieter zone'],['7','Panoramic Infinity','Ocean-view infinity'],['8','Infinity Pool','Ocean-view infinity']];
+  const pl=document.getElementById('poolsList');if(pl)pl.innerHTML=pools.map(p=>`<div class="poolcard"><div class="poolnum">#${p[0]}</div><div><div style="font-weight:700;color:var(--hd);font-size:14px">${p[1]}</div><div style="font-size:12px;color:var(--muted)">${p[2]}</div></div></div>`).join('');
   const wx=[['Sat','Jun 27','☀️','82°/73°','Sunshine'],['Sun','Jun 28','☀️','84°/75°','Plenty sun'],['Mon','Jun 29','🌤️','85°/76°','Partly sunny'],['Tue','Jun 30','☀️','85°/74°','Plenty sun'],['Wed','Jul 1','☀️','77°/76°','Sunshine'],['Thu','Jul 2','☀️','77°/76°','Mostly sunny'],['Fri','Jul 3','❓','TBD','Check closer']];
   document.getElementById('weatherGrid').innerHTML=wx.map(w=>`<div class="wday"><div class="wd">${w[0]}</div><div class="wdate">${w[1]}</div><div class="wi">${w[2]}</div><div class="wt">${w[3]}</div><div class="wn">${w[4]}</div></div>`).join('');
   const matrix=['Sandcastle building','Face painting','Movie time','Beach volleyball','Treasure hunt','Make a mandala','Video games','Reading club','Dreamcatcher crafts','Just Dance','Bracelet making','DIY keychains','Beach sports','Scavenger hunt'];
@@ -659,6 +755,7 @@ function calc(){
   set('overallPacked',pct+'%');set('packedItems',`${d} / ${t} items`);
   set('shoppingOpen',open);set('orderedCount',ordered);set('maybeCount',maybe);set('dashShopOpen',open);
   set('m_overall',pct+'%');set('m_packed',`${d}/${t}`);set('m_outstanding',t-d);set('m_shopopen',open);
+  const toBuy=data.shopping.filter(x=>x[3]!=='Ordered').length;const sb=document.getElementById('shopBadge');if(sb){sb.textContent=toBuy;sb.className='pill '+(open?'bad':toBuy?'warn':'ok')}
   setw('m_overallBar',pct+'%');
   const sst=document.getElementById('shopStatusText');if(sst){sst.textContent=open?`${open} essential open`:'Essentials done';sst.className='pill '+(open?'bad':'ok')}
   const ready=Math.round((100+100+65+(open?75:100)+pct+50)/6);
@@ -672,6 +769,7 @@ function filterPacking(type,btn){if(btn){btn.parentElement.querySelectorAll('but
 function showOutstandingOnly(btn){if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}document.querySelectorAll('#personCards tr,#sharedSections tr').forEach(tr=>{const cb=tr.querySelector('input[type=checkbox]');if(cb)tr.style.display=cb.checked?'none':''})}
 function expandAll(){document.querySelectorAll('#personCards details,#sharedSections details').forEach(d=>d.open=true)}
 function collapseAll(){document.querySelectorAll('#personCards details,#sharedSections details').forEach(d=>d.open=false)}
+function subView(group,name,btn){document.querySelectorAll(`[data-sub="${group}"]`).forEach(s=>s.classList.toggle('active',s.dataset.name===name));if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}if(group==='pack'){const f=document.getElementById('packFilters');if(f)f.style.display=name==='list'?'flex':'none'}window.scrollTo({top:0,behavior:'smooth'})}
 
 function applyTheme(t){if(t==='dark')document.body.setAttribute('data-theme','dark');else document.body.removeAttribute('data-theme');const b=document.getElementById('themeBtn');if(b)b.textContent=t==='dark'?'☀️ Light':'🌙 Dark'}
 function toggleTheme(){const next=document.body.getAttribute('data-theme')==='dark'?'':'dark';localStorage.setItem('caboTheme',next);applyTheme(next)}
