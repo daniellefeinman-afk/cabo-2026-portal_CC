@@ -68,11 +68,11 @@ tr:hover td{background:#f8fafc}
 input:not([type=checkbox]):not([type=file]),textarea,select{font-family:inherit;font-size:13px;border:1px solid var(--border);border-radius:6px;padding:6px 8px;background:#fff;color:var(--text);width:100%;transition:border-color .15s}
 input:not([type=checkbox]):focus,textarea:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,122,110,.1)}
 input[type=checkbox]{width:17px;height:17px;accent-color:var(--teal);cursor:pointer;flex-shrink:0}
-textarea{min-height:58px;resize:vertical}
+textarea{min-height:52px;resize:vertical}
 .delete{background:none;border:none;color:var(--subtle);font-size:16px;padding:2px 6px;cursor:pointer;border-radius:4px;font-family:inherit}
 .delete:hover{background:var(--bad-bg);color:var(--bad)}
 button{font-family:inherit;cursor:pointer}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:7px;font-size:13px;font-weight:700;border:1px solid var(--border);background:#fff;color:var(--navy);cursor:pointer;transition:all .15s}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:7px;font-size:13px;font-weight:700;border:1px solid var(--border);background:#fff;color:var(--navy);cursor:pointer;transition:all .15s;text-decoration:none}
 .btn:hover{background:var(--bg)}
 .btn.sm{padding:5px 10px;font-size:12px}
 .checkrow{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer}
@@ -127,10 +127,21 @@ details .inner{padding:0 15px 15px}
 .alert{padding:11px 14px;border-radius:var(--rs);font-size:13px;font-weight:600;margin-bottom:13px}
 .alert.warn{background:var(--warn-bg);color:var(--warn)}
 .alert.info{background:var(--info-bg);color:var(--info)}
+.alert.ok{background:var(--ok-bg);color:var(--ok)}
+.callout{border:1px solid var(--border);border-left:5px solid var(--teal);border-radius:var(--rs);padding:13px 15px;background:#fff;box-shadow:var(--sh);margin-bottom:12px}
+.callout.warn{border-left-color:#d97706}
+.callout h4{font-size:15px;font-weight:800;color:var(--navy);margin:2px 0 5px}
+.callout p{font-size:13px;color:var(--text)}
 .sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px}
 .src-link{display:flex;align-items:center;gap:9px;padding:11px 0;border-bottom:1px solid var(--border);text-decoration:none;color:var(--text);font-size:14px}
 .src-link:last-child{border-bottom:none}
 .src-link:hover{color:var(--teal)}
+.kv-row{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.kv-row:last-child{border-bottom:none}
+.kv-row .k{color:var(--muted)}
+.kv-row .v{font-weight:600;color:var(--text);text-align:right}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--neu-bg);color:var(--neu);font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px}
 a{color:var(--teal);font-weight:600;text-decoration:none}
 a:hover{text-decoration:underline}
 @media(max-width:768px){
@@ -163,27 +174,13 @@ a:hover{text-decoration:underline}
     <div class="sb-sub">Jun 27 – Jul 3 · Garza Blanca</div>
   </div>
   <div class="sb-nav">
-    <button class="nav-btn active" onclick="showPage('dashboard',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard
-    </button>
-    <button class="nav-btn" onclick="showPage('confirmations',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 12 2 2 4-4"/></svg>Confirmations
-    </button>
-    <button class="nav-btn" onclick="showPage('travel',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19.5 2.5S18 2 16.5 3.5L13 7 4.8 5.2l-1.3 1.3 3.8 3.8-2 2-1.4-.9-1.4 1.3 2.5 2.5 2.5 2.5L8.3 19l1.3-1.4-.9-1.4 2-2 3.8 3.8 1.3-1.3z"/></svg>Flights &amp; Travel
-    </button>
-    <button class="nav-btn" onclick="showPage('packing',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>Packing Hub
-    </button>
-    <button class="nav-btn" onclick="showPage('resort',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Resort Ops
-    </button>
-    <button class="nav-btn" onclick="showPage('dog',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703.383 1.297.8 1.797.418.5.97.862 1.563 1.048L6 18l2 2 3-1 3 1 2-2-.137-5.154a5.233 5.233 0 0 0 1.485-1.078c.384-.461.667-1.012.752-1.768.26-2.214-1.72-6.502-4.6-7C12.563 2.68 11 3.785 10 5.172z"/></svg>Dog Boarding
-    </button>
-    <button class="nav-btn" onclick="showPage('sources',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Sources
-    </button>
+    <button class="nav-btn active" onclick="showPage('dashboard',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</button>
+    <button class="nav-btn" onclick="showPage('confirmations',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 12 2 2 4-4"/></svg>Confirmations</button>
+    <button class="nav-btn" onclick="showPage('travel',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19.5 2.5S18 2 16.5 3.5L13 7 4.8 5.2l-1.3 1.3 3.8 3.8-2 2-1.4-.9-1.4 1.3 2.5 2.5 2.5 2.5L8.3 19l1.3-1.4-.9-1.4 2-2 3.8 3.8 1.3-1.3z"/></svg>Flights &amp; Travel</button>
+    <button class="nav-btn" onclick="showPage('packing',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>Packing Hub</button>
+    <button class="nav-btn" onclick="showPage('resort',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Resort Ops</button>
+    <button class="nav-btn" onclick="showPage('dog',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703.383 1.297.8 1.797.418.5.97.862 1.563 1.048L6 18l2 2 3-1 3 1 2-2-.137-5.154a5.233 5.233 0 0 0 1.485-1.078c.384-.461.667-1.012.752-1.768.26-2.214-1.72-6.502-4.6-7C12.563 2.68 11 3.785 10 5.172z"/></svg>Dog Boarding</button>
+    <button class="nav-btn" onclick="showPage('sources',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Sources</button>
   </div>
   <div class="sb-foot">
     <button onclick="exportData()">↓ Export</button>
@@ -208,65 +205,48 @@ a:hover{text-decoration:underline}
     <!-- DASHBOARD -->
     <section class="page active" id="dashboard">
       <div class="g c4 mb14">
-        <div class="card kpi">
-          <div class="kl">Days to go</div>
-          <div class="kv" id="daysLeft">–</div>
-          <div class="ks">until Jun 27, 2026</div>
+        <div class="card kpi"><div class="kl">Days to go</div><div class="kv" id="daysLeft">–</div><div class="ks">until Jun 27, 2026</div></div>
+        <div class="card kpi"><div class="kl">Readiness</div><div class="kv" id="readinessPct">–</div><div class="ptrack"><div class="pfill" id="readinessBar" style="width:0%"></div></div></div>
+        <div class="card kpi"><div class="kl">Packing</div><div class="kv" id="overallPacked">–</div><div class="ks" id="packedItems">– items</div><div class="ptrack"><div class="pfill" id="overallPackedBar" style="width:0%"></div></div></div>
+        <div class="card kpi"><div class="kl">Open tasks</div><div class="kv" id="criticalCount" style="color:#ef4444">–</div><div class="ks">critical items</div></div>
+      </div>
+
+      <div class="g c2 mb14">
+        <div class="card">
+          <div class="ctitle">Today's operating orders</div>
+          <label class="checkrow"><input type="checkbox" data-k="order_dog"><div><div class="cr-label">Close dog boarding</div><div class="cr-sub">Book Firehouse, else pay PetSuites deposit</div></div></label>
+          <label class="checkrow"><input type="checkbox" data-k="order_transfer"><div><div class="cr-label">Get transfer details from Andrea</div><div class="cr-sub">Company · SJD meeting point · return pickup time</div></div></label>
+          <label class="checkrow"><input type="checkbox" data-k="order_docs"><div><div class="cr-label">Fix Southwest passport alerts</div><div class="cr-sub">All 6 travelers show "needs attention"</div></div></label>
+          <label class="checkrow"><input type="checkbox" data-k="order_shopping"><div><div class="cr-label">Close essential shopping</div><div class="cr-sub">Stroller decision · Gibson sandals · June water shoes</div></div></label>
         </div>
-        <div class="card kpi">
-          <div class="kl">Readiness</div>
-          <div class="kv" id="readinessPct">–</div>
-          <div class="ptrack"><div class="pfill" id="readinessBar" style="width:0%"></div></div>
-        </div>
-        <div class="card kpi">
-          <div class="kl">Packing</div>
-          <div class="kv" id="overallPacked">–</div>
-          <div class="ks" id="packedItems">– items</div>
-          <div class="ptrack"><div class="pfill" id="overallPackedBar" style="width:0%"></div></div>
-        </div>
-        <div class="card kpi">
-          <div class="kl">Open tasks</div>
-          <div class="kv" id="criticalCount" style="color:#ef4444">–</div>
-          <div class="ks">critical items</div>
+        <div class="card">
+          <div class="ctitle">Critical path</div>
+          <div class="kv-row"><span class="k">Flights</span><span class="v"><span class="pill ok">Booked</span></span></div>
+          <div class="kv-row"><span class="k">Resort</span><span class="v"><span class="pill ok">Booked</span></span></div>
+          <div class="kv-row"><span class="k">Austin → AUS</span><span class="v"><span class="pill ok">Uber</span></span></div>
+          <div class="kv-row"><span class="k">SJD transfers</span><span class="v"><span class="pill warn">Details pending</span></span></div>
+          <div class="kv-row"><span class="k">Dog boarding</span><span class="v"><span class="pill warn">Waiting</span></span></div>
+          <div class="kv-row"><span class="k">Passports</span><span class="v"><span class="pill warn">Update SW</span></span></div>
         </div>
       </div>
 
       <div class="g c2 mb14">
         <div class="card">
-          <div class="ctitle">Critical checklist</div>
-          <label class="checkrow"><input type="checkbox" data-k="order_dog"><div><div class="cr-label">Dog boarding booked</div><div class="cr-sub">Facility confirmed for Jun 26–Jul 3</div></div></label>
-          <label class="checkrow"><input type="checkbox" data-k="order_transfer"><div><div class="cr-label">Cabo transfer confirmed</div><div class="cr-sub">Pickup via Andrea — arrival + return</div></div></label>
-          <label class="checkrow"><input type="checkbox" data-k="order_docs"><div><div class="cr-label">Passport info added to reservations</div><div class="cr-sub">All 6 travelers: Southwest + resort</div></div></label>
-          <label class="checkrow"><input type="checkbox" data-k="order_shopping"><div><div class="cr-label">Shopping complete</div><div class="cr-sub">All essential items ordered or purchased</div></div></label>
-        </div>
-        <div class="card">
           <div class="ctitle">Confirmation codes</div>
           <div style="display:flex;flex-direction:column;gap:10px;margin-top:2px">
             <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-              <div>
-                <div style="font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.07em">WN627 Outbound · Danielle + Levon</div>
-                <div style="font-size:20px;font-weight:800;font-family:ui-monospace,monospace;color:var(--navy);letter-spacing:.06em">ACYITW</div>
-              </div>
+              <div><div style="font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.07em">WN627 · Danielle + Levon</div><div style="font-size:20px;font-weight:800;font-family:ui-monospace,monospace;color:var(--navy);letter-spacing:.06em">ACYITW</div></div>
               <button class="copy-btn" onclick="copyCode('ACYITW',this)">Copy</button>
             </div>
             <div style="border-top:1px solid var(--border);padding-top:10px;display:flex;justify-content:space-between;align-items:center;gap:10px">
-              <div>
-                <div style="font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.07em">WN627 Outbound · Steven + kids</div>
-                <div style="font-size:20px;font-weight:800;font-family:ui-monospace,monospace;color:var(--navy);letter-spacing:.06em">ACWDMM</div>
-              </div>
+              <div><div style="font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.07em">WN627 · Steven + kids</div><div style="font-size:20px;font-weight:800;font-family:ui-monospace,monospace;color:var(--navy);letter-spacing:.06em">ACWDMM</div></div>
               <button class="copy-btn" onclick="copyCode('ACWDMM',this)">Copy</button>
             </div>
             <button class="btn sm" onclick="navTo('confirmations')" style="margin-top:2px">All confirmations →</button>
           </div>
         </div>
-      </div>
-
-      <div class="g c2">
         <div class="card">
-          <div class="sh">
-            <div class="ctitle" style="margin:0">Shopping</div>
-            <span class="pill" id="shopStatusText" style="background:var(--info-bg);color:var(--info)">–</span>
-          </div>
+          <div class="sh"><div class="ctitle" style="margin:0">Shopping</div><span class="pill" id="shopStatusText" style="background:var(--info-bg);color:var(--info)">–</span></div>
           <div style="display:flex;gap:16px;margin-bottom:12px">
             <div><div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Open</div><div style="font-size:20px;font-weight:800;color:var(--navy)" id="shoppingOpen">–</div></div>
             <div><div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Ordered</div><div style="font-size:20px;font-weight:800;color:var(--ok)" id="orderedCount">–</div></div>
@@ -275,95 +255,29 @@ a:hover{text-decoration:underline}
           <table style="font-size:12px"><tbody id="shoppingMiniRows"></tbody></table>
           <button class="btn sm" style="margin-top:10px" onclick="navTo('packing')">Packing hub →</button>
         </div>
-        <div class="card">
-          <div class="ctitle">Flight snapshot</div>
-          <div class="g c2 mb12">
-            <div style="background:var(--bg);border-radius:var(--rs);padding:11px">
-              <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Outbound</div>
-              <div style="font-size:17px;font-weight:800;color:var(--navy);margin:2px 0">WN627</div>
-              <div style="font-size:12px;color:var(--muted)">AUS → SJD · Jun 27</div>
-              <div style="font-size:12px;color:var(--muted)">Departs 12:00 PM</div>
-            </div>
-            <div style="background:var(--bg);border-radius:var(--rs);padding:11px">
-              <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Return</div>
-              <div style="font-size:17px;font-weight:800;color:var(--navy);margin:2px 0">WN628</div>
-              <div style="font-size:12px;color:var(--muted)">SJD → AUS · Jul 3</div>
-              <div style="font-size:12px;color:var(--muted)">Departs 11:35 AM</div>
-            </div>
-          </div>
-          <div class="alert warn">⚠ Passport info must be added to Southwest reservations for all 6 travelers.</div>
-          <button class="btn sm" onclick="navTo('travel')">Full travel details →</button>
-        </div>
       </div>
+
+      <div class="alert warn">⚠ Passport info must be added to Southwest reservations for all 6 travelers. &nbsp;·&nbsp; Dog boarding + SJD transfer details still open.</div>
     </section>
 
     <!-- CONFIRMATIONS -->
     <section class="page" id="confirmations">
-      <p style="font-size:13px;color:var(--muted);margin-bottom:18px">Tap any code to copy to clipboard.</p>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:18px">Tap any code or number to copy to clipboard.</p>
       <div class="ctitle" style="margin-bottom:10px">✈ Flights — Southwest Airlines</div>
-      <div class="conf-card">
-        <div class="conf-icon" style="background:#dbeafe">✈</div>
-        <div class="conf-body">
-          <div class="conf-lbl">WN627 Outbound · AUS → SJD · Jun 27, 12:00 PM</div>
-          <div class="conf-code">ACYITW</div>
-          <div class="conf-detail">Danielle Feinman (25E Middle) + Levon Feinman (25F Window)</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('ACYITW',this)">Copy</button>
-      </div>
-      <div class="conf-card">
-        <div class="conf-icon" style="background:#dbeafe">✈</div>
-        <div class="conf-body">
-          <div class="conf-lbl">WN627 Outbound · AUS → SJD · Jun 27, 12:00 PM</div>
-          <div class="conf-code">ACWDMM</div>
-          <div class="conf-detail">Steven (25A Window) · Olive (25B Middle) · June (25C Aisle) · Gibson (25D Aisle)</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('ACWDMM',this)">Copy</button>
-      </div>
-      <div class="conf-card">
-        <div class="conf-icon" style="background:#dbeafe">✈</div>
-        <div class="conf-body">
-          <div class="conf-lbl">WN628 Return · SJD → AUS · Jul 3, 11:35 AM</div>
-          <div class="conf-code" style="font-size:16px">ACYITW + ACWDMM</div>
-          <div class="conf-detail">Same confirmation codes apply for return flight</div>
-        </div>
-      </div>
-      <div class="ctitle" style="margin-top:20px;margin-bottom:10px">🏨 Resort</div>
-      <div class="conf-card">
-        <div class="conf-icon" style="background:#dcfce7">🌴</div>
-        <div class="conf-body">
-          <div class="conf-lbl">Garza Blanca Resort &amp; Spa Los Cabos · Jun 27 – Jul 3 (6 nights)</div>
-          <div class="conf-code" style="font-size:16px;opacity:.4;cursor:default">Add confirmation #</div>
-          <div class="conf-detail">Enter resort confirmation number when available</div>
-        </div>
-      </div>
-      <div class="ctitle" style="margin-top:20px;margin-bottom:10px">🚐 Transfers</div>
-      <div class="conf-card">
-        <div class="conf-icon" style="background:#fef3c7">🚐</div>
-        <div class="conf-body">
-          <div class="conf-lbl">Cabo Airport Transfer — arranged via Andrea</div>
-          <div class="conf-code" style="font-size:16px;opacity:.4;cursor:default">Cost TBD</div>
-          <div class="conf-detail">Outbound: SJD pickup after 12:25 PM arrival &nbsp;·&nbsp; Return: Hotel pickup 8:00 AM</div>
-        </div>
-      </div>
+      <div class="conf-card"><div class="conf-icon" style="background:#dbeafe">✈</div><div class="conf-body"><div class="conf-lbl">WN627 Outbound · AUS → SJD · Jun 27, 12:00 PM → 12:25 PM</div><div class="conf-code">ACYITW</div><div class="conf-detail">Danielle (25E Middle) + Levon (25F Window)</div></div><button class="copy-btn" onclick="copyCode('ACYITW',this)">Copy</button></div>
+      <div class="conf-card"><div class="conf-icon" style="background:#dbeafe">✈</div><div class="conf-body"><div class="conf-lbl">WN627 Outbound · AUS → SJD · Jun 27, 12:00 PM → 12:25 PM</div><div class="conf-code">ACWDMM</div><div class="conf-detail">Steven (25A) · Olive (25B) · June (25C) · Gibson (25D)</div></div><button class="copy-btn" onclick="copyCode('ACWDMM',this)">Copy</button></div>
+      <div class="conf-card"><div class="conf-icon" style="background:#dbeafe">✈</div><div class="conf-body"><div class="conf-lbl">WN628 Return · SJD → AUS · Jul 3, 11:35 AM → 4:00 PM</div><div class="conf-code" style="font-size:16px">ACYITW + ACWDMM</div><div class="conf-detail">Same confirmation codes + seats apply for return</div></div></div>
+
+      <div class="ctitle" style="margin-top:20px;margin-bottom:10px">🏨 Resort — Garza Blanca Los Cabos</div>
+      <div class="conf-card"><div class="conf-icon" style="background:#dcfce7">🌴</div><div class="conf-body"><div class="conf-lbl">Stay · Jun 27 – Jul 3 (6 nights)</div><div class="conf-code" style="font-size:16px"><input data-txt="resortConf" placeholder="Add confirmation #" style="font-family:ui-monospace,monospace;font-weight:800;font-size:15px;max-width:240px"></div><div class="conf-detail">Carretera Transpeninsular Km. 17.5, Corredor Turístico, Cabo San Lucas, BCS 23405</div></div></div>
+      <div class="conf-card"><div class="conf-icon" style="background:#dcfce7">📞</div><div class="conf-body"><div class="conf-lbl">Resort phone</div><div class="conf-code" style="font-size:18px">+52 624 105 4460</div><div class="conf-detail">Toll free: 1 800 931 6023</div></div><button class="copy-btn" onclick="copyCode('+526241054460',this)">Copy</button></div>
+
+      <div class="ctitle" style="margin-top:20px;margin-bottom:10px">🚐 Transfers — via Andrea</div>
+      <div class="conf-card"><div class="conf-icon" style="background:#fef3c7">🚐</div><div class="conf-body"><div class="conf-lbl">Cabo airport transfer (SJD ↔ resort)</div><div class="conf-code" style="font-size:16px;color:var(--warn)">Details pending</div><div class="conf-detail">Outbound: SJD pickup after 12:25 PM · Return: resort pickup 8:00 AM. Confirm company + meeting point with Andrea.</div></div></div>
+
       <div class="ctitle" style="margin-top:20px;margin-bottom:10px">⭐ Rapid Rewards</div>
-      <div class="conf-card">
-        <div class="conf-icon" style="background:#f0fdf4">⭐</div>
-        <div class="conf-body">
-          <div class="conf-lbl">Southwest Rapid Rewards — Steven</div>
-          <div class="conf-code">113228581</div>
-          <div class="conf-detail">Seat 25A Window</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('113228581',this)">Copy</button>
-      </div>
-      <div class="conf-card">
-        <div class="conf-icon" style="background:#f0fdf4">⭐</div>
-        <div class="conf-body">
-          <div class="conf-lbl">Southwest Rapid Rewards — Danielle</div>
-          <div class="conf-code">20602391143</div>
-          <div class="conf-detail">Seat 25E Middle</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('20602391143',this)">Copy</button>
-      </div>
+      <div class="conf-card"><div class="conf-icon" style="background:#f0fdf4">⭐</div><div class="conf-body"><div class="conf-lbl">Southwest Rapid Rewards — Steven</div><div class="conf-code">113228581</div><div class="conf-detail">Seat 25A Window</div></div><button class="copy-btn" onclick="copyCode('113228581',this)">Copy</button></div>
+      <div class="conf-card"><div class="conf-icon" style="background:#f0fdf4">⭐</div><div class="conf-body"><div class="conf-lbl">Southwest Rapid Rewards — Danielle</div><div class="conf-code">20602391143</div><div class="conf-detail">Seat 25E Middle</div></div><button class="copy-btn" onclick="copyCode('20602391143',this)">Copy</button></div>
       <div class="alert warn" style="margin-top:20px">⚠ Passport information must be added to Southwest reservations for all 6 travelers before departure.</div>
     </section>
 
@@ -371,38 +285,32 @@ a:hover{text-decoration:underline}
     <section class="page" id="travel">
       <div class="card mb14">
         <div class="sh">
-          <div>
-            <div style="font-size:22px;font-weight:800;color:var(--navy);letter-spacing:-.03em" id="flightNo">WN627</div>
-            <div style="font-size:13px;color:var(--muted);margin-top:1px" id="flightRoute">AUS → SJD</div>
-          </div>
-          <div style="text-align:right">
-            <div style="font-size:24px;font-weight:800;color:var(--navy)" id="flightDepart">12:00 PM</div>
-            <div style="font-size:12px;color:var(--muted)" id="flightArrive">Arrives 12:25 PM · SJD</div>
-          </div>
+          <div><div style="font-size:22px;font-weight:800;color:var(--navy);letter-spacing:-.03em" id="flightNo">WN627</div><div style="font-size:13px;color:var(--muted);margin-top:1px" id="flightRoute">AUS → SJD</div></div>
+          <div style="text-align:right"><div style="font-size:24px;font-weight:800;color:var(--navy)" id="flightDepart">12:00 PM</div><div style="font-size:12px;color:var(--muted)" id="flightArrive">Arrives 12:25 PM · SJD</div></div>
         </div>
         <div class="tabs" style="margin-top:10px;margin-bottom:0">
           <button class="tab active" onclick="setFlight('outbound',this)">WN627 Outbound (Jun 27)</button>
           <button class="tab" onclick="setFlight('return',this)">WN628 Return (Jul 3)</button>
         </div>
       </div>
-      <div class="card mb14">
-        <div class="ctitle">Seat assignments — Row 25</div>
-        <div class="seat-grid" id="seatGrid"></div>
-      </div>
-      <div class="card mb14">
-        <div class="ctitle">Passenger details</div>
-        <div class="tw">
-          <table>
-            <thead><tr><th>Name</th><th>Seat</th><th>Confirmation</th><th>Rapid Rewards</th><th>Docs</th></tr></thead>
-            <tbody id="passengerRows"></tbody>
-          </table>
-        </div>
-      </div>
+      <div class="card mb14"><div class="ctitle">Seat assignments — Row 25 (same both ways)</div><div class="seat-grid" id="seatGrid"></div></div>
+      <div class="card mb14"><div class="ctitle">Passenger details</div><div class="tw"><table><thead><tr><th>Name</th><th>Seat</th><th>Confirmation</th><th>Rapid Rewards</th><th>Docs</th></tr></thead><tbody id="passengerRows"></tbody></table></div></div>
+
       <div class="tabs">
         <button class="tab active" onclick="setTripDay('outbound',this)">Outbound day (Jun 27)</button>
         <button class="tab" onclick="setTripDay('return',this)">Return day (Jul 3)</button>
       </div>
-      <div id="tripdayCard"></div>
+      <div id="tripdayCard" class="mb14"></div>
+
+      <div class="card">
+        <div class="ctitle">Transfer details — confirm with Andrea</div>
+        <div class="g c2">
+          <div><label style="font-size:12px;color:var(--muted);font-weight:700">Transfer company</label><input data-txt="trCompany" placeholder="Add when received" style="margin-top:4px"></div>
+          <div><label style="font-size:12px;color:var(--muted);font-weight:700">SJD meeting point</label><input data-txt="trMeet" placeholder="Where to meet at SJD" style="margin-top:4px"></div>
+          <div><label style="font-size:12px;color:var(--muted);font-weight:700">Return pickup time @ resort</label><input data-txt="trReturn" value="8:00 AM target — confirm" style="margin-top:4px"></div>
+          <div><label style="font-size:12px;color:var(--muted);font-weight:700">Uber estimate (each way)</label><input data-txt="trUber" value="$65–$100 est." style="margin-top:4px"></div>
+        </div>
+      </div>
     </section>
 
     <!-- PACKING -->
@@ -410,12 +318,7 @@ a:hover{text-decoration:underline}
       <details open class="mb14">
         <summary>Shopping tracker</summary>
         <div class="inner">
-          <div class="tw">
-            <table>
-              <thead><tr><th>Item</th><th>Qty</th><th>Owner</th><th>Status</th><th>Ordered</th><th>Onsite</th><th>Purchased</th><th>Notes</th><th></th></tr></thead>
-              <tbody id="shopRows"></tbody>
-            </table>
-          </div>
+          <div class="tw"><table><thead><tr><th>Item</th><th>Qty</th><th>Owner</th><th>Status</th><th>Ordered</th><th>Delivered</th><th>Packed</th><th>Notes</th><th></th></tr></thead><tbody id="shopRows"></tbody></table></div>
           <button class="btn sm" style="margin-top:10px" onclick="collectAll();data.shopping.push(['','1','Danielle','Maybe',false,false,false,'']);renderAll()">+ Add item</button>
         </div>
       </details>
@@ -423,10 +326,10 @@ a:hover{text-decoration:underline}
         <button class="active" onclick="filterPacking('all',this)">All</button>
         <button onclick="filterPacking('adults',this)">Adults</button>
         <button onclick="filterPacking('kids',this)">Kids</button>
-        <button onclick="filterPacking('pool',this)">Pool</button>
+        <button onclick="filterPacking('pool',this)">Pool + Beach</button>
         <button onclick="filterPacking('toiletries',this)">Toiletries</button>
         <button onclick="filterPacking('travel',this)">Travel day</button>
-        <button onclick="filterPacking('room',this)">Room</button>
+        <button onclick="filterPacking('room',this)">Room setup</button>
         <button onclick="showOutstandingOnly(this)" style="background:var(--warn-bg);color:var(--warn);border-color:var(--warn)">Outstanding only</button>
       </div>
       <div id="personCards" style="margin-bottom:14px"></div>
@@ -435,41 +338,113 @@ a:hover{text-decoration:underline}
 
     <!-- RESORT OPS -->
     <section class="page" id="resort">
-      <div class="card mb14">
-        <div class="ctitle">Dining — Garza Blanca</div>
-        <div id="foodDash"></div>
-      </div>
       <div class="g c2 mb14">
         <div class="card">
-          <div class="ctitle">Weather Jun 27 – Jul 3</div>
-          <div class="wgrid" id="weatherGrid"></div>
+          <div class="ctitle">Contact + address</div>
+          <div class="kv-row"><span class="k">Resort</span><span class="v">Garza Blanca Los Cabos</span></div>
+          <div class="kv-row"><span class="k">Phone</span><span class="v">+52 624 105 4460</span></div>
+          <div class="kv-row"><span class="k">Toll free</span><span class="v">1 800 931 6023</span></div>
+          <div class="kv-row"><span class="k">Address</span><span class="v" style="max-width:60%">Carretera Transpeninsular Km. 17.5, Cabo San Lucas, BCS 23405</span></div>
         </div>
         <div class="card">
-          <div class="ctitle">Pool tote</div>
-          <div class="tw">
-            <table>
-              <thead><tr><th>Item</th><th>Qty</th><th>Packed</th></tr></thead>
-              <tbody id="poolToteRows"></tbody>
-            </table>
+          <div class="ctitle">All-inclusive notes</div>
+          <p style="font-size:13px;color:var(--text)">Includes dining, drinks, 24-hr room service, activities, Wi-Fi, concierge, taxes/fees.</p>
+          <p style="font-size:12px;color:var(--muted);margin-top:6px">Premium dishes, wine/liquor bottles, select culinary events, and spa are add-ons or discounted — not a default free-for-all.</p>
+        </div>
+      </div>
+
+      <div class="card mb14">
+        <div class="ctitle">Ask at arrival</div>
+        <div class="g c2">
+          <div class="kv-row"><span class="k">Kids Club</span><span class="v">Daily schedule + signup</span></div>
+          <div class="kv-row"><span class="k">Dining</span><span class="v">Reservations? Kids menu?</span></div>
+          <div class="kv-row"><span class="k">Rooms</span><span class="v">Numbers / proximity / keys</span></div>
+          <div class="kv-row"><span class="k">Pool</span><span class="v">Best kid pool / towels / cabanas</span></div>
+        </div>
+      </div>
+
+      <div class="card mb14"><div class="ctitle">Dining — no click-through needed</div><div id="foodDash"></div></div>
+
+      <div class="g c2 mb14">
+        <div class="card"><div class="ctitle">Weather Jun 27 – Jul 3</div><div class="wgrid" id="weatherGrid"></div><p style="font-size:11px;color:var(--muted);margin-top:8px">Pool-first, sun-heavy pattern. Extreme UV — hats, rash guards, sunscreen. Warm lows; light layers only.</p></div>
+        <div class="card"><div class="ctitle">Pool system &amp; tote</div>
+          <div style="font-size:13px;color:var(--text);margin-bottom:8px">8 pools — Kids #2, Family #6, Main #4, Relaxing #3, Panoramic/Infinity #7 &amp; #8. Beach available but surf can be real, so pool is default with kids.</div>
+          <div class="tw"><table><thead><tr><th>Pool tote item</th><th>Qty</th><th>Packed</th></tr></thead><tbody id="poolToteRows"></tbody></table></div>
+        </div>
+      </div>
+
+      <div class="g c2 mb14">
+        <div class="card"><div class="ctitle">Kids Club + activity menu</div>
+          <div class="kv-row"><span class="k">Hours</span><span class="v">9:00 AM – 5:00 PM</span></div>
+          <div class="kv-row"><span class="k">Ages</span><span class="v">4–12</span></div>
+          <div class="kv-row"><span class="k">Supervision</span><span class="v">Certified bilingual staff</span></div>
+          <div class="kv-row"><span class="k">Under 4 / after hours</span><span class="v">Paid babysitting — confirm</span></div>
+          <div style="margin-top:10px"><div class="ctitle">Activity matrix</div><div class="chips" id="kidsMatrix"></div></div>
+        </div>
+        <div class="card"><div class="ctitle">Facilities by floor</div>
+          <div class="kv-row"><span class="k">Lobby</span><span class="v">Floor 5</span></div>
+          <div class="kv-row"><span class="k">Kids Club</span><span class="v">Floor 2</span></div>
+          <div class="kv-row"><span class="k">Medical center</span><span class="v">Floor 2</span></div>
+          <div class="kv-row"><span class="k">Fitness center</span><span class="v">Floor 6</span></div>
+          <div class="kv-row"><span class="k">Spa</span><span class="v">Floor 9</span></div>
+          <div class="kv-row"><span class="k">Hospitality room</span><span class="v">Floor 6</span></div>
+          <div style="margin-top:8px"><div class="ctitle">Tower room ranges</div>
+            <div class="kv-row"><span class="k">Tower 1</span><span class="v">201–1027</span></div>
+            <div class="kv-row"><span class="k">Tower 2</span><span class="v">229–931</span></div>
+            <div class="kv-row"><span class="k">Tower 3</span><span class="v">332–838</span></div>
+            <div class="kv-row"><span class="k">Tower 4</span><span class="v">239–1042</span></div>
           </div>
         </div>
       </div>
-      <div class="card">
-        <div class="ctitle">Onsite tasks</div>
-        <div class="tw">
-          <table>
-            <thead><tr><th>Day</th><th>Task</th><th>Owner</th><th>Done</th><th></th></tr></thead>
-            <tbody id="onsiteRows"></tbody>
-          </table>
+
+      <div class="card mb14">
+        <div class="ctitle">Room setup &amp; breakout</div>
+        <div class="g c3" id="roomBreakout"></div>
+        <div style="margin-top:10px" class="g c3">
+          <div class="alert info" style="margin:0">🛏 Parents / Levon room — diapers, wipes, meds, bedtime basics</div>
+          <div class="alert info" style="margin:0">👧 Girls room — brush, hair ties, detangler, toothbrushes</div>
+          <div class="alert info" style="margin:0">🧳 Shared ops — laundry bags, hooks, clothesline, shoe bags</div>
         </div>
-        <button class="btn sm" style="margin-top:10px" onclick="collectAll();data.onsite.push(['','','',false]);renderAll()">+ Add task</button>
+      </div>
+
+      <div class="card">
+        <div class="ctitle">Onsite plans &amp; notes</div>
+        <div class="tw"><table><thead><tr><th>Day / Plan</th><th>Detail</th><th>Owner</th><th>Done</th><th></th></tr></thead><tbody id="onsiteRows"></tbody></table></div>
+        <button class="btn sm" style="margin-top:10px" onclick="collectAll();data.onsite.push(['','','',false]);renderAll()">+ Add plan / note</button>
       </div>
     </section>
 
     <!-- DOG BOARDING -->
     <section class="page" id="dog">
-      <div class="alert info">📅 Coverage needed: Jun 26 evening drop-off → Jul 3 pickup ~6–7 PM</div>
+      <div class="g c4 mb14">
+        <div class="card kpi"><div class="kl">Status</div><div class="kv" style="font-size:22px">Waiting</div><div class="ks">Top 3 contacted</div></div>
+        <div class="card kpi"><div class="kl">Top fit</div><div class="kv" style="font-size:22px">Firehouse</div><div class="ks">$490–$525 est.</div></div>
+        <div class="card kpi"><div class="kl">Fastest backup</div><div class="kv" style="font-size:20px">PetSuites</div><div class="ks">Deposit pending</div></div>
+        <div class="card kpi"><div class="kl">Dog</div><div class="kv" style="font-size:20px">Friday Lee</div><div class="ks">50 lb lab mix</div></div>
+      </div>
+
+      <div class="callout"><div class="ctitle" style="margin:0">Recommendation</div><h4>Book Firehouse if they confirm availability + normal first-stay requirements.</h4><p>Cleanest travel fit: flexible 7 PM pickup after your 4 PM AUS landing, professional operation, no interview surfaced yet. Nancy called back from 512-310-7387 — needs account setup + reservation info to confirm a room.</p></div>
+      <div class="callout warn"><div class="ctitle" style="margin:0">Decision rule</div><h4>If Firehouse isn't confirmed today, pay the PetSuites deposit.</h4><p>PetSuites already has a reservation started for Jun 26 at 1:00 PM and agreements signed — only the deposit completes it. Fastest path to "dog boarding = closed."</p></div>
+
+      <div class="alert info">📅 Drop-off Fri Jun 26 (1:00–6:00 PM; Firehouse/Camp ideal 5–6 PM) &nbsp;·&nbsp; Pickup Fri Jul 3, 6:00–7:00 PM (lands AUS 4 PM)</div>
+
+      <div class="ctitle" style="margin:16px 0 8px">Active vendor tracker</div>
       <div id="dogRows"></div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="ctitle">Full comparison — all options</div>
+        <div class="tw"><table><thead><tr><th>#</th><th>Facility</th><th>Drive</th><th>Est. cost</th><th>Status</th><th>Travel fit</th><th>Links</th></tr></thead><tbody id="dogCompare"></tbody></table></div>
+      </div>
+
+      <div class="g c2" style="margin-top:14px">
+        <div class="card"><div class="ctitle">Firehouse callback script</div><ul style="font-size:13px;margin:0;padding-left:18px;line-height:1.7"><li>Confirm boarding Jun 26 – Jul 3 for Friday Lee</li><li>Drop-off Fri Jun 26 ~5–6 PM</li><li>Pickup Fri Jul 3 ~6–7 PM</li><li>Ask all-in cost incl. holiday/day/pickup fees</li><li>Any eval, trial day, or vaccine gap that blocks boarding?</li></ul></div>
+        <div class="card"><div class="ctitle">Vaccine requirements</div>
+          <div class="kv-row"><span class="k">PetSuites</span><span class="v" style="max-width:60%">DHPP, rabies, bordetella, canine influenza</span></div>
+          <div class="kv-row"><span class="k">Camp Bow Wow</span><span class="v" style="max-width:60%">Rabies, bordetella, distemper</span></div>
+          <p style="font-size:12px;color:var(--muted);margin-top:8px">Camp Bow Wow requires a Camper Interview (Melissa texted a scheduling link) + vaccine records before the first day.</p>
+        </div>
+      </div>
+
       <div class="card" style="margin-top:14px">
         <div class="ctitle">Pre-booking checklist</div>
         <div class="g c3" style="margin-top:6px" id="dogChecklist"></div>
@@ -479,9 +454,11 @@ a:hover{text-decoration:underline}
     <!-- SOURCES -->
     <section class="page" id="sources">
       <div class="card">
-        <div class="ctitle">Reference links</div>
-        <a class="src-link" href="https://www.southwest.com/air/manage-reservation/index.html" target="_blank">✈ Southwest — Manage reservation (ACYITW / ACWDMM)</a>
-        <a class="src-link" href="https://www.garzablanca.com" target="_blank">🏨 Garza Blanca Resort &amp; Spa Los Cabos</a>
+        <div class="ctitle">Live links</div>
+        <a class="src-link" href="https://www.southwest.com/air/manage-reservation/" target="_blank">✈ Southwest — Manage reservation (ACYITW / ACWDMM)</a>
+        <a class="src-link" href="https://www.garzablancaresort.com/los-cabos" target="_blank">🏨 Garza Blanca Resort &amp; Spa Los Cabos</a>
+        <a class="src-link" href="https://www.aeropuertosgap.com.mx/en/los-cabos-3.html" target="_blank">🛬 SJD — Los Cabos Airport</a>
+        <a class="src-link" href="https://www.flyaustin.com/" target="_blank">🛫 AUS — Austin-Bergstrom Airport</a>
         <a class="src-link" href="https://firehousepetresort.com/firehouse-pet-resort-round-rock-tx" target="_blank">🐾 Firehouse Pet Resort — Round Rock</a>
         <a class="src-link" href="https://www.campbowwow.com/austin/services-pricing/dog-boarding/" target="_blank">🐾 Camp Bow Wow Austin North</a>
         <a class="src-link" href="https://roundrock.petsuitesofamerica.com/services/boarding" target="_blank">🐾 PetSuites Round Rock</a>
@@ -494,120 +471,137 @@ a:hover{text-decoration:underline}
 
 <nav class="bottomnav">
   <div class="bni">
-    <button class="bnav-btn active" onclick="showPage('dashboard',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Home
-    </button>
-    <button class="bnav-btn" onclick="showPage('confirmations',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 12 2 2 4-4"/></svg>Codes
-    </button>
-    <button class="bnav-btn" onclick="showPage('travel',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19.5 2.5S18 2 16.5 3.5L13 7 4.8 5.2l-1.3 1.3 3.8 3.8-2 2-1.4-.9-1.4 1.3 2.5 2.5 2.5 2.5L8.3 19l1.3-1.4-.9-1.4 2-2 3.8 3.8 1.3-1.3z"/></svg>Flights
-    </button>
-    <button class="bnav-btn" onclick="showPage('packing',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Packing
-    </button>
-    <button class="bnav-btn" onclick="showPage('resort',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Resort
-    </button>
-    <button class="bnav-btn" onclick="showPage('dog',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703.383 1.297.8 1.797.418.5.97.862 1.563 1.048L6 18l2 2 3-1 3 1 2-2-.137-5.154a5.233 5.233 0 0 0 1.485-1.078c.384-.461.667-1.012.752-1.768.26-2.214-1.72-6.502-4.6-7C12.563 2.68 11 3.785 10 5.172z"/></svg>Dog
-    </button>
+    <button class="bnav-btn active" onclick="showPage('dashboard',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Home</button>
+    <button class="bnav-btn" onclick="showPage('confirmations',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 12 2 2 4-4"/></svg>Codes</button>
+    <button class="bnav-btn" onclick="showPage('travel',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19.5 2.5S18 2 16.5 3.5L13 7 4.8 5.2l-1.3 1.3 3.8 3.8-2 2-1.4-.9-1.4 1.3 2.5 2.5 2.5 2.5L8.3 19l1.3-1.4-.9-1.4 2-2 3.8 3.8 1.3-1.3z"/></svg>Flights</button>
+    <button class="bnav-btn" onclick="showPage('packing',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Packing</button>
+    <button class="bnav-btn" onclick="showPage('resort',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Resort</button>
+    <button class="bnav-btn" onclick="showPage('dog',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703.383 1.297.8 1.797.418.5.97.862 1.563 1.048L6 18l2 2 3-1 3 1 2-2-.137-5.154a5.233 5.233 0 0 0 1.485-1.078c.384-.461.667-1.012.752-1.768.26-2.214-1.72-6.502-4.6-7C12.563 2.68 11 3.785 10 5.172z"/></svg>Dog</button>
   </div>
 </nav>
 </div>
 
 <script>
-const defaults={checks:{},shopping:[['Portable travel game notepads','1 set','Danielle','Ordered',true,false,false,'Travel activities'],['XL travel laundry bags','2','Danielle','Ordered',true,false,false,'Room ops'],['Apple AirTags','4','Danielle','Ordered',true,false,false,'Bag tracking'],['Kids snorkel gear','2 sets','Danielle','Ordered',true,false,false,'Decide if 3rd set needed'],['Travel shoe bags','6','Danielle','Ordered',true,false,false,'Organization'],['Kids water bottles','4','Danielle','Ordered',true,false,false,'Two 2-packs'],['Sand-free beach tote','1','Danielle','Ordered',true,false,false,'Pool tote'],['Kids backpacks','4','Danielle','Ordered',true,false,false,'One per kid'],['Magnetic hooks','12','Danielle','Ordered',true,false,false,'Room ops'],['AirTag holders','4','Danielle','Ordered',true,false,false,'Bag tracking'],['Cable organizer pouch','1','Danielle','Ordered',true,false,false,'Tech'],['Door stop alarms','2','Danielle','Ordered',true,false,false,'Room safety'],['Travel activities/games','Multiple','Danielle','Ordered',true,false,false,'Spot It, Mad Libs, cameras, journal'],['Packing cubes','8 set','Danielle','Ordered',true,false,false,'Organization'],['Umbrella stroller','1','Danielle','Essential',false,false,false,'Still open unless bought elsewhere'],['Gibson sandals','1 pair','Danielle','Essential',false,false,false,'Still open'],['June water shoes','1 pair','Danielle','Essential',false,false,false,'Still open'],['Kids headphones','4','Danielle','Maybe',false,false,false,'For plane'],['Glow sticks','1 pack','Danielle','Optional',false,false,false,'Optional'],['Mini flashlights','2-4','Danielle','Optional',false,false,false,'Optional'],['Noise machine','1 optional','Danielle','Optional',false,false,false,'Optional'],['Travel stuffed animal','1 optional','Danielle','Optional',false,false,false,'Optional']],people:{Olive:[['Clothing','Travel day outfit','1',false,''],['Clothing','Resort-day outfits','5',false,''],['Clothing','Extra underwear','8-10',false,''],['Clothing','Pajamas','2-3',false,''],['Swimwear','Swimsuits','3-4',false,''],['Swimwear','Rash guards','2-3',false,''],['Shoes','Plane shoes','1 pair',false,''],['Shoes','Sandals','1 pair',false,''],['Shoes','Water shoes','1 pair',false,'']],June:[['Clothing','Travel day outfit','1',false,''],['Clothing','Resort-day outfits','5',false,''],['Clothing','Extra underwear','8-10',false,''],['Clothing','Pajamas','2-3',false,''],['Swimwear','Swimsuits','3-4',false,''],['Swimwear','Rash guards','2-3',false,''],['Shoes','Plane shoes','1 pair',false,''],['Shoes','Sandals','1 pair',false,''],['Shoes','Water shoes','1 pair',false,'Still need / buying']],Gibson:[['Clothing','Travel day outfit','1',false,''],['Clothing','Resort-day outfits','5',false,''],['Clothing','Extra underwear','8-10',false,''],['Clothing','Pajamas','2-3',false,''],['Swimwear','Swimsuits','3-4',false,''],['Swimwear','Rash guards','2-3',false,''],['Shoes','Plane shoes','1 pair',false,''],['Shoes','Sandals','1 pair',false,'Still need / buying'],['Shoes','Water shoes','1 pair',false,'Confirm owned or buy']],Levon:[['Clothing','Travel day outfit','1',false,''],['Clothing','Resort-day outfits','5',false,''],['Clothing','Extra underwear','8-10',false,''],['Clothing','Pajamas','2-3',false,''],['Swimwear','Swimsuits','3-4',false,''],['Swimwear','Rash guards','2-3',false,''],['Shoes','Plane shoes','1 pair',false,''],['Shoes','Sandals','1 pair',false,''],['Shoes','Water shoes','1 pair',false,'']],Danielle:[['Clothing','Travel outfit','1',false,''],['Clothing','Swimsuits','3-4',false,''],['Clothing','Coverups','2-3',false,''],['Clothing','Light dinner outfits','5',false,''],['Clothing','Pajamas','2',false,''],['Clothing','Underwear','7+',false,''],['Shoes','Sandals','1-2 pairs',false,''],['Personal','Hat / sunglasses','1 each',false,'']],Steven:[['Clothing','Travel outfit','1',false,''],['Clothing','Swimsuits','3-4',false,''],['Clothing','Resort clothes','5',false,''],['Clothing','Light dinner clothes','5',false,''],['Clothing','Pajamas','2',false,''],['Clothing','Underwear','7+',false,''],['Shoes','Sandals','1 pair',false,''],['Personal','Hat / sunglasses','1 each',false,'']]},shared:{pool:[['Swim','Goggles','4','Danielle',false,'Confirm owned/pack'],['Swim','Snorkel gear','2 sets','Danielle',false,'Ordered; decide if 3rd set needed'],['Hydration','Kids water bottles','4','Kids',false,'Ordered'],['Sun','Kids sunscreen','2-3 bottles','Danielle',false,'Confirm/buy'],['Sun','Face sunscreen stick','1-2','Danielle',false,'Confirm/buy'],['Pool Ops','Wet bags/plastic bags','6-8','Danielle',false,'Wet suits/accidents']],toiletries:[['Dental','Kids toothbrushes','4','Danielle',false,''],['Dental','Kids toothpaste','1','Danielle',false,''],['Hair','Hair ties','1 pack','Danielle',false,''],['Hair','Detangler','1','Danielle',false,''],['Hair','Brush for girls room','1','Danielle',false,''],['Levon','Nighttime diapers','7-8','Danielle',false,''],['Levon','Wipes','1-2 packs','Danielle',false,'']],travel:[['Documents','Passports','6','Danielle',false,'Carry-on only'],['Documents','Flight confirmations','2','Danielle',false,'ACYITW + ACWDMM'],['Kids bags','Kids backpacks','4','Kids',false,'Ordered'],['Kids bags','AirTags + holders','4','Danielle',false,'Ordered'],['Kids bags','Headphones','4','Family',false,'Maybe buy'],['Snacks','Plane snacks','1 bag','Danielle',false,''],['Activities','Travel games/books','Multiple','Family',false,'Ordered']],room:[['Packing','Packing cubes','8 set','Danielle',false,'Ordered'],['Packing','Travel shoe bags','6 pack','Danielle',false,'Ordered'],['Laundry','XL dirty laundry bags','2','Danielle',false,'Ordered'],['Laundry','Retractable clothesline','1','Danielle',false,'Ordered'],['Room Ops','Magnetic hooks','12 pack','Danielle',false,'Ordered'],['Room Ops','Door stop alarms','2','Danielle',false,'Ordered']]},onsite:[['Arrival day','Confirm room numbers + proximity','Danielle',false],['Kids Club','Ask current activity schedule','Danielle',false]],dogNotes:{},dogStatus:{},poolTote:[['Sunscreen','2-3',false],['Face stick','1-2',false],['Water bottles','4',false],['Wet bag/plastic bags','6-8',false],['Mesh shell bags','3',false],['Room key / phone / sunglasses','1 set',false]]};
+const defaults={checks:{},txt:{},
+shopping:[
+['Apple AirTags','4','Danielle','Ordered',true,true,false,'Bag tracking'],
+['AirTag holders','4','Danielle','Ordered',true,true,false,'Bag tracking'],
+['Kids backpacks','4','Danielle','Ordered',true,true,false,'One per kid'],
+['Kids water bottles','4','Danielle','Ordered',true,true,false,'Two 2-packs'],
+['Snorkel sets','2','Danielle','Ordered',true,true,false,'Consider 3rd set'],
+['Packing cubes','8 set','Danielle','Ordered',true,true,false,'Organization'],
+['Sand-free beach tote','1','Danielle','Ordered',true,true,false,'Pool tote'],
+['Kids shell / beach bags','3','Danielle','Ordered',true,true,false,'Pool tote'],
+['Travel activity journal','1','Family','Ordered',true,true,false,'Plane'],
+['Travel game notepads','1 set','Family','Ordered',true,true,false,'Plane'],
+['Spot It','1','Family','Ordered',true,true,false,'Plane'],
+['Mad Libs','1','Family','Ordered',true,true,false,'Plane'],
+['Disposable cameras','2','Family','Ordered',true,true,false,'Kids'],
+['Cable organizer + ties','1 set','Danielle','Ordered',true,true,false,'Tech'],
+['XL laundry bags','2','Danielle','Ordered',true,true,false,'Room ops'],
+['Retractable clothesline','1','Danielle','Ordered',true,true,false,'Room ops'],
+['Travel shoe bags','6','Danielle','Ordered',true,true,false,'Organization'],
+['Magnetic hooks','12','Danielle','Ordered',true,true,false,'Room ops'],
+['Door stop alarms','2','Danielle','Ordered',true,true,false,'Room safety'],
+['Kids sunscreen','2-3','Danielle','Ordered',true,true,false,'Confirm volume'],
+['Umbrella stroller','1','Danielle','Essential',false,false,false,'Open / decide'],
+['Gibson sandals','1 pair','Danielle','Essential',false,false,false,'Still open'],
+['June water shoes','1 pair','Danielle','Essential',false,false,false,'Still open'],
+['Kids headphones','4','Family','Maybe',false,false,false,'For plane'],
+['Glow sticks','1 pack','Family','Optional',false,false,false,'Optional'],
+['Mini flashlights','2-4','Family','Optional',false,false,false,'Optional'],
+['Noise machine','1','Danielle','Optional',false,false,false,'Optional'],
+['Travel stuffed animal','1','Danielle','Optional',false,false,false,'Optional']
+],
+people:{
+Olive:[['Clothing','Travel day outfit','1',false,''],['Clothing','Resort-day outfits','5',false,''],['Clothing','Extra underwear','8-10',false,''],['Clothing','Pajamas','2-3',false,''],['Swimwear','Swimsuits','3-4',false,''],['Swimwear','Rash guards','2-3',false,''],['Shoes','Plane shoes','1 pair',false,''],['Shoes','Sandals','1 pair',false,''],['Shoes','Water shoes','1 pair',false,''],['Layers','Light jacket','1',false,'']],
+June:[['Clothing','Travel day outfit','1',false,''],['Clothing','Resort-day outfits','5',false,''],['Clothing','Extra underwear','8-10',false,''],['Clothing','Pajamas','2-3',false,''],['Swimwear','Swimsuits','3-4',false,''],['Swimwear','Rash guards','2-3',false,''],['Shoes','Plane shoes','1 pair',false,''],['Shoes','Sandals','1 pair',false,''],['Shoes','Water shoes','1 pair',false,'Buy / pack'],['Layers','Light jacket','1',false,'']],
+Gibson:[['Clothing','Travel day outfit','1',false,''],['Clothing','Resort-day outfits','5',false,''],['Clothing','Extra underwear','8-10',false,''],['Clothing','Pajamas','2-3',false,''],['Swimwear','Swimsuits','3-4',false,''],['Swimwear','Rash guards','2-3',false,''],['Shoes','Plane shoes','1 pair',false,''],['Shoes','Sandals','1 pair',false,'Buy / pack'],['Shoes','Water shoes','1 pair',false,'Confirm if owned'],['Layers','Light jacket','1',false,'']],
+Levon:[['Clothing','Travel day outfit','1',false,''],['Clothing','Resort-day outfits','5',false,''],['Clothing','Extra underwear','8-10',false,''],['Clothing','Pajamas','2-3',false,''],['Swimwear','Swimsuits','3-4',false,''],['Swimwear','Rash guards','2-3',false,''],['Shoes','Plane shoes','1 pair',false,''],['Shoes','Sandals','1 pair',false,''],['Shoes','Water shoes','1 pair',false,''],['Diapers','Nighttime diapers','7-8',false,''],['Diapers','Wipes','1-2 packs',false,''],['Layers','Light jacket','1',false,'']],
+Danielle:[['Clothing','Travel outfit','1',false,''],['Clothing','Swimsuits','3-4',false,''],['Clothing','Coverups','2-3',false,''],['Clothing','Light dinner outfits','5',false,''],['Clothing','Pajamas','2',false,''],['Clothing','Underwear','7+',false,''],['Shoes','Sandals','1-2 pairs',false,''],['Accessories','Hat','1',false,''],['Accessories','Sunglasses','1',false,''],['Layers','Light jacket','1',false,'']],
+Steven:[['Clothing','Travel outfit','1',false,''],['Clothing','Swimsuits','3-4',false,''],['Clothing','Resort clothes','5',false,''],['Clothing','Light dinner clothes','5',false,''],['Clothing','Pajamas','2',false,''],['Clothing','Underwear','7+',false,''],['Shoes','Sandals','1 pair',false,''],['Accessories','Hat','1',false,''],['Accessories','Sunglasses','1',false,'']]
+},
+shared:{
+pool:[['Swim','Goggles','4','Danielle',false,'Confirm owned'],['Swim','Snorkel gear','2 sets','Danielle',false,'Ordered; consider 3rd'],['Hydration','Kids water bottles','4','Danielle',false,'Ordered'],['Pool Tote','Sand-free beach tote','1','Danielle',false,'Ordered'],['Pool Tote','Kids shell / beach bags','3','Danielle',false,'Ordered'],['Sun','Kids sunscreen','2-3 bottles','Danielle',false,'Confirm/buy'],['Sun','Face sunscreen stick','1-2','Danielle',false,'Confirm/buy'],['Wet Items','Wet / plastic bags','6-8','Danielle',false,'For wet suits']],
+travel:[['Docs','Passports','6','Danielle',false,'Carry-on only'],['Docs','Flight confirmations','2','Danielle',false,'ACYITW + ACWDMM'],['Kids bags','Backpacks','4','Kids',false,'Ordered'],['Kids bags','AirTags + holders','4','Danielle',false,'Ordered'],['Plane','Headphones','4','Family',false,'Maybe / open'],['Plane','Snacks','1 family bag','Danielle',false,''],['Activities','Travel activity journal','1','Family',false,'Ordered'],['Activities','Travel game notepads','1 set','Family',false,'Ordered'],['Activities','Spot It','1','Family',false,'Ordered'],['Activities','Mad Libs','1','Family',false,'Ordered'],['Activities','Disposable cameras','2','Family',false,'Ordered'],['Tech','Cable organizer + ties','1 set','Danielle',false,'Ordered']],
+toiletries:[['Dental','Kids toothbrushes','4','Danielle',false,''],['Dental','Kids toothpaste','1','Danielle',false,''],['Hair','Hair ties','1 pack','Danielle',false,''],['Hair','Detangler','1','Danielle',false,''],['Hair','Girls room brush','1','Danielle',false,''],['Health','Kids medicine kit','1','Danielle',false,'Pain/allergy/bandaids'],['Sun','After-sun / aloe','1','Danielle',false,'Optional']],
+room:[['Laundry','XL dirty laundry bags','2','Danielle',false,'Ordered'],['Laundry','Retractable clothesline','1','Danielle',false,'Ordered'],['Packing','Packing cubes','8 set','Danielle',false,'Ordered'],['Packing','Shoe bags','6 pack','Danielle',false,'Ordered'],['Room Ops','Magnetic hooks','12 pack','Danielle',false,'Ordered'],['Safety','Door stop alarms','2','Danielle',false,'Ordered'],['Stroller','Umbrella stroller','1','Danielle',false,'Open / decide']]
+},
+onsite:[['Arrival day','Confirm room numbers + proximity','Danielle',false],['Kids Club','Ask current activity schedule + signup','Danielle',false],['Dining','Confirm reservation needs + kids menu','Danielle',false]],
+rooms:{r0:'',r1:'',r2:''},
+dogNotes:{},dogStatus:{},
+poolTote:[['Sunscreen + face stick','2-3',false],['Water bottles','4',false],['Goggles / snorkels','—',false],['Wet / plastic bags','6-8',false],['Room key / phone / sunglasses','1 set',false]]};
 
 let data=loadData();
-function loadData(){try{const x=JSON.parse(localStorage.getItem('caboPortal_v1'));if(x)return merge(defaults,x)}catch(e){}return JSON.parse(JSON.stringify(defaults))}
+function loadData(){try{const x=JSON.parse(localStorage.getItem('caboPortal_v2'));if(x)return merge(defaults,x)}catch(e){}return JSON.parse(JSON.stringify(defaults))}
 function merge(a,b){if(Array.isArray(a))return b||a;const o={...a};for(const k in b){if(a[k]&&typeof a[k]==='object'&&!Array.isArray(a[k]))o[k]=merge(a[k],b[k]);else o[k]=b[k]}return o}
-function saveAll(){collectAll();localStorage.setItem('caboPortal_v1',JSON.stringify(data));renderAll()}
+function saveAll(){collectAll();localStorage.setItem('caboPortal_v2',JSON.stringify(data));renderAll()}
 
 const pageNames={dashboard:'Dashboard',confirmations:'Confirmations',travel:'Flights & Travel',packing:'Packing Hub',resort:'Resort Operations',dog:'Dog Boarding',sources:'Sources'};
-
-function showPage(id,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.nav-btn,.bnav-btn').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  document.getElementById('pageTitle').textContent=pageNames[id]||id;
-  window.scrollTo(0,0);
-}
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav-btn,.bnav-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');document.getElementById('pageTitle').textContent=pageNames[id]||id;window.scrollTo(0,0)}
 function navTo(id){showPage(id,document.querySelector(`.nav-btn[onclick*="'${id}'"]`))}
-
-function daysUntil(){
-  const x=Math.ceil((new Date('2026-06-27')-new Date())/86400000);
-  document.getElementById('daysLeft').textContent=x>0?x:0;
-}
-
-function copyCode(code,btn){
-  const orig=btn.textContent;
-  navigator.clipboard.writeText(code).then(()=>{btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied')},2000)}).catch(()=>{const t=document.createElement('textarea');t.value=code;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);btn.textContent='Copied!';setTimeout(()=>btn.textContent=orig,2000)});
-}
+function daysUntil(){const x=Math.ceil((new Date('2026-06-27')-new Date())/86400000);document.getElementById('daysLeft').textContent=x>0?x:0}
+function copyCode(code,btn){const orig=btn.textContent;navigator.clipboard.writeText(code).then(()=>{btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied')},2000)}).catch(()=>{const t=document.createElement('textarea');t.value=code;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);btn.textContent='Copied!';setTimeout(()=>btn.textContent=orig,2000)})}
 
 const passengers=[['Steven','25A Window','ACWDMM','113228581'],['Olive','25B Middle','ACWDMM','—'],['June','25C Aisle','ACWDMM','—'],['Gibson','25D Aisle','ACWDMM','—'],['Danielle','25E Middle','ACYITW','20602391143'],['Levon','25F Window','ACYITW','—']];
-
-function setFlight(which,btn){
-  if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
-  const o=which==='outbound';
-  document.getElementById('flightNo').textContent=o?'WN627':'WN628';
-  document.getElementById('flightRoute').textContent=o?'AUS → SJD':'SJD → AUS';
-  document.getElementById('flightDepart').textContent=o?'12:00 PM':'11:35 AM';
-  document.getElementById('flightArrive').textContent=o?'Arrives 12:25 PM · SJD':'Arrives 4:00 PM · AUS';
-  renderSeats();
-}
-
-function renderSeats(){
-  document.getElementById('seatGrid').innerHTML=passengers.map(p=>`<div class="seat"><div class="seat-no">${p[1].split(' ')[0]}</div><div class="seat-name">${p[0]}</div><div class="seat-meta">${p[1].replace(p[1].split(' ')[0]+' ','')} · ${p[2]}</div></div>`).join('');
-  document.getElementById('passengerRows').innerHTML=passengers.map(p=>`<tr><td style="font-weight:700">${p[0]}</td><td>${p[1]}</td><td style="font-family:ui-monospace,monospace;font-weight:800">${p[2]}</td><td>${p[3]}</td><td><span class="pill warn">Needed</span></td></tr>`).join('');
-}
-
-function setTripDay(which,btn){
-  if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
-  const o=which==='outbound';
-  const rows=o?[['9:10 AM','Leave home — 2110 Emmett Parkway'],['10:00 AM','Arrive AUS — checked bags + international'],['12:00 PM','WN627 departs AUS'],['12:25 PM','Arrive SJD'],['TBD','Meet pre-arranged Cabo transfer (via Andrea)']]:[['8:00 AM','Leave Garza Blanca resort'],['8:45 AM','Arrive SJD — international departure'],['11:35 AM','WN628 departs SJD'],['4:00 PM','Arrive AUS'],['~5:15 PM','Uber home / dog pickup (depends on facility)']];
-  const costs=o?[['Uber to AUS','Estimate TBD — live Uber'],['Checked bags','Southwest policy — verify'],['Cabo transfer','Via Andrea · cost TBD']]:[['Resort → SJD transfer','Via Andrea · cost TBD'],['Uber home from AUS','Estimate TBD — live Uber'],['Dog pickup','Facility cost depends on booking']];
-  document.getElementById('tripdayCard').innerHTML=`<div class="g c2"><div class="card"><div class="ctitle">${o?'Outbound':'Return'} timeline</div><div class="tl">${rows.map(r=>`<div class="tlt">${r[0]}</div><div class="tle">${r[1]}</div>`).join('')}</div></div><div class="card"><div class="ctitle">Transfer + cost notes</div><div class="tw"><table><thead><tr><th>Item</th><th>Cost / Status</th></tr></thead><tbody>${costs.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</tbody></table></div></div></div>`;
-}
+function setFlight(which,btn){if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}const o=which==='outbound';document.getElementById('flightNo').textContent=o?'WN627':'WN628';document.getElementById('flightRoute').textContent=o?'AUS → SJD':'SJD → AUS';document.getElementById('flightDepart').textContent=o?'12:00 PM':'11:35 AM';document.getElementById('flightArrive').textContent=o?'Arrives 12:25 PM · SJD':'Arrives 4:00 PM · AUS';renderSeats()}
+function renderSeats(){document.getElementById('seatGrid').innerHTML=passengers.map(p=>`<div class="seat"><div class="seat-no">${p[1].split(' ')[0]}</div><div class="seat-name">${p[0]}</div><div class="seat-meta">${p[1].replace(p[1].split(' ')[0]+' ','')} · ${p[2]}</div></div>`).join('');document.getElementById('passengerRows').innerHTML=passengers.map(p=>`<tr><td style="font-weight:700">${p[0]}</td><td>${p[1]}</td><td style="font-family:ui-monospace,monospace;font-weight:800">${p[2]}</td><td>${p[3]}</td><td><span class="pill warn">Needed</span></td></tr>`).join('')}
+function setTripDay(which,btn){if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}const o=which==='outbound';const rows=o?[['9:10 AM','Uber leaves 2110 Emmett Pkwy'],['10:00 AM','Arrive AUS — checked bags + international'],['12:00 PM','WN627 departs AUS'],['12:25 PM','Arrive SJD'],['TBD','Meet pre-arranged Cabo transfer (Andrea)']]:[['8:00 AM','Leave Garza Blanca resort'],['8:45 AM','Arrive SJD — international departure buffer'],['11:35 AM','WN628 departs SJD'],['4:00 PM','Arrive AUS'],['6:00–7:00 PM','Dog pickup window · Uber home']];document.getElementById('tripdayCard').innerHTML=`<div class="card"><div class="ctitle">${o?'Outbound — Sat Jun 27':'Return — Fri Jul 3'}</div><div class="tl">${rows.map(r=>`<div class="tlt">${r[0]}</div><div class="tle">${r[1]}</div>`).join('')}</div></div>`}
 
 function esc(s){return String(s||'').replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;')}
 
 function renderShopping(){
-  document.getElementById('shopRows').innerHTML=data.shopping.map((r,i)=>`<tr><td><input value="${esc(r[0])}" data-shop="${i}" data-f="0"></td><td><input value="${esc(r[1])}" data-shop="${i}" data-f="1" style="width:50px"></td><td><input value="${esc(r[2])}" data-shop="${i}" data-f="2" style="width:70px"></td><td><select data-shop="${i}" data-f="3"><option ${r[3]==='Essential'?'selected':''}>Essential</option><option ${r[3]==='Maybe'?'selected':''}>Maybe</option><option ${r[3]==='Optional'?'selected':''}>Optional</option><option ${r[3]==='Ordered'?'selected':''}>Ordered</option></select></td><td style="text-align:center"><input type="checkbox" ${r[4]?'checked':''} data-shop="${i}" data-f="4"></td><td style="text-align:center"><input type="checkbox" ${r[5]?'checked':''} data-shop="${i}" data-f="5"></td><td style="text-align:center"><input type="checkbox" ${r[6]?'checked':''} data-shop="${i}" data-f="6"></td><td><input value="${esc(r[7])}" data-shop="${i}" data-f="7"></td><td><button class="delete" onclick="data.shopping.splice(${i},1);renderAll()">×</button></td></tr>`).join('');
-  document.getElementById('shoppingMiniRows').innerHTML=data.shopping.filter(x=>!x[4]||['Essential','Maybe','Optional'].includes(x[3])).slice(0,8).map(r=>`<tr><td>${r[0]}</td><td><span class="pill ${r[4]?'ok':r[3]==='Essential'?'bad':'warn'}">${r[4]?'Ordered':r[3]}</span></td></tr>`).join('');
+  document.getElementById('shopRows').innerHTML=data.shopping.map((r,i)=>`<tr><td><input value="${esc(r[0])}" data-shop="${i}" data-f="0"></td><td><input value="${esc(r[1])}" data-shop="${i}" data-f="1" style="width:54px"></td><td><input value="${esc(r[2])}" data-shop="${i}" data-f="2" style="width:74px"></td><td><select data-shop="${i}" data-f="3"><option ${r[3]==='Essential'?'selected':''}>Essential</option><option ${r[3]==='Maybe'?'selected':''}>Maybe</option><option ${r[3]==='Optional'?'selected':''}>Optional</option><option ${r[3]==='Ordered'?'selected':''}>Ordered</option></select></td><td style="text-align:center"><input type="checkbox" ${r[4]?'checked':''} data-shop="${i}" data-f="4"></td><td style="text-align:center"><input type="checkbox" ${r[5]?'checked':''} data-shop="${i}" data-f="5"></td><td style="text-align:center"><input type="checkbox" ${r[6]?'checked':''} data-shop="${i}" data-f="6"></td><td><input value="${esc(r[7])}" data-shop="${i}" data-f="7"></td><td><button class="delete" onclick="data.shopping.splice(${i},1);renderAll()">×</button></td></tr>`).join('');
+  document.getElementById('shoppingMiniRows').innerHTML=data.shopping.filter(x=>x[3]!=='Ordered'||!x[6]).slice(0,8).map(r=>`<tr><td>${r[0]}</td><td><span class="pill ${r[3]==='Ordered'?'ok':r[3]==='Essential'?'bad':'warn'}">${r[3]}</span></td></tr>`).join('');
 }
-
-function renderPeople(){
-  document.getElementById('personCards').innerHTML=Object.entries(data.people).map(([p,items])=>`<details class="person-card" data-type="${['Olive','June','Gibson','Levon'].includes(p)?'kids':'adults'}" open><summary>${p}&nbsp;<span class="pill neutral" id="${p}Stat"></span><button class="btn sm" style="margin-left:auto;font-size:11px" onclick="event.stopPropagation();markAll('${p}')">Mark all packed</button></summary><div class="inner"><div class="tw"><table><thead><tr><th>Category</th><th>Item</th><th>Qty</th><th>Packed</th><th>Notes</th><th></th></tr></thead><tbody>${items.map((r,i)=>`<tr><td><input value="${esc(r[0])}" data-person="${p}" data-i="${i}" data-f="0"></td><td><input value="${esc(r[1])}" data-person="${p}" data-i="${i}" data-f="1"></td><td><input value="${esc(r[2])}" data-person="${p}" data-i="${i}" data-f="2" style="width:50px"></td><td style="text-align:center"><input type="checkbox" ${r[3]?'checked':''} data-person="${p}" data-i="${i}" data-f="3"></td><td><input value="${esc(r[4]||'')}" data-person="${p}" data-i="${i}" data-f="4"></td><td><button class="delete" onclick="data.people['${p}'].splice(${i},1);renderAll()">×</button></td></tr>`).join('')}</tbody></table></div><button class="btn sm" style="margin-top:8px" onclick="collectAll();data.people['${p}'].push(['','','',false,'']);renderAll()">+ Add item</button></div></details>`).join('');
-}
+function renderPeople(){document.getElementById('personCards').innerHTML=Object.entries(data.people).map(([p,items])=>`<details class="person-card" data-type="${['Olive','June','Gibson','Levon'].includes(p)?'kids':'adults'}" open><summary>${p}&nbsp;<span class="pill neutral" id="${p}Stat"></span><button class="btn sm" style="margin-left:auto;font-size:11px" onclick="event.stopPropagation();markAll('${p}')">Mark all packed</button></summary><div class="inner"><div class="tw"><table><thead><tr><th>Category</th><th>Item</th><th>Qty</th><th>Packed</th><th>Notes</th><th></th></tr></thead><tbody>${items.map((r,i)=>`<tr><td><input value="${esc(r[0])}" data-person="${p}" data-i="${i}" data-f="0"></td><td><input value="${esc(r[1])}" data-person="${p}" data-i="${i}" data-f="1"></td><td><input value="${esc(r[2])}" data-person="${p}" data-i="${i}" data-f="2" style="width:54px"></td><td style="text-align:center"><input type="checkbox" ${r[3]?'checked':''} data-person="${p}" data-i="${i}" data-f="3"></td><td><input value="${esc(r[4]||'')}" data-person="${p}" data-i="${i}" data-f="4"></td><td><button class="delete" onclick="data.people['${p}'].splice(${i},1);renderAll()">×</button></td></tr>`).join('')}</tbody></table></div><button class="btn sm" style="margin-top:8px" onclick="collectAll();data.people['${p}'].push(['','','',false,'']);renderAll()">+ Add item</button></div></details>`).join('')}
 function markAll(person){collectAll();data.people[person].forEach(r=>r[3]=true);renderAll()}
-
-function secTitle(s){return{pool:'Pool + Beach',toiletries:'Toiletries',travel:'Travel Day',room:'Room Ops'}[s]||s}
-function renderShared(){
-  document.getElementById('sharedSections').innerHTML=Object.entries(data.shared).map(([sec,items])=>`<details data-sharedsec="${sec}" open><summary>${secTitle(sec)}&nbsp;<span class="pill neutral" id="${sec}Stat"></span><button class="btn sm" style="margin-left:auto;font-size:11px" onclick="event.stopPropagation();markAllShared('${sec}')">Mark all</button></summary><div class="inner"><div class="tw"><table><thead><tr><th>Cat.</th><th>Item</th><th>Qty</th><th>Owner</th><th>Packed</th><th>Notes</th><th></th></tr></thead><tbody>${items.map((r,i)=>`<tr><td><input value="${esc(r[0])}" data-shared="${sec}" data-i="${i}" data-f="0"></td><td><input value="${esc(r[1])}" data-shared="${sec}" data-i="${i}" data-f="1"></td><td><input value="${esc(r[2])}" data-shared="${sec}" data-i="${i}" data-f="2" style="width:50px"></td><td><input value="${esc(r[3])}" data-shared="${sec}" data-i="${i}" data-f="3" style="width:70px"></td><td style="text-align:center"><input type="checkbox" ${r[4]?'checked':''} data-shared="${sec}" data-i="${i}" data-f="4"></td><td><input value="${esc(r[5]||'')}" data-shared="${sec}" data-i="${i}" data-f="5"></td><td><button class="delete" onclick="data.shared['${sec}'].splice(${i},1);renderAll()">×</button></td></tr>`).join('')}</tbody></table></div><button class="btn sm" style="margin-top:8px" onclick="collectAll();data.shared['${sec}'].push(['','','','',false,'']);renderAll()">+ Add item</button></div></details>`).join('');
-}
+function secTitle(s){return{pool:'Pool + Beach',toiletries:'Toiletries',travel:'Travel Day',room:'Resort Room Setup'}[s]||s}
+function renderShared(){document.getElementById('sharedSections').innerHTML=Object.entries(data.shared).map(([sec,items])=>`<details data-sharedsec="${sec}" open><summary>${secTitle(sec)}&nbsp;<span class="pill neutral" id="${sec}Stat"></span><button class="btn sm" style="margin-left:auto;font-size:11px" onclick="event.stopPropagation();markAllShared('${sec}')">Mark all</button></summary><div class="inner"><div class="tw"><table><thead><tr><th>Cat.</th><th>Item</th><th>Qty</th><th>Owner</th><th>Packed</th><th>Notes</th><th></th></tr></thead><tbody>${items.map((r,i)=>`<tr><td><input value="${esc(r[0])}" data-shared="${sec}" data-i="${i}" data-f="0"></td><td><input value="${esc(r[1])}" data-shared="${sec}" data-i="${i}" data-f="1"></td><td><input value="${esc(r[2])}" data-shared="${sec}" data-i="${i}" data-f="2" style="width:54px"></td><td><input value="${esc(r[3])}" data-shared="${sec}" data-i="${i}" data-f="3" style="width:74px"></td><td style="text-align:center"><input type="checkbox" ${r[4]?'checked':''} data-shared="${sec}" data-i="${i}" data-f="4"></td><td><input value="${esc(r[5]||'')}" data-shared="${sec}" data-i="${i}" data-f="5"></td><td><button class="delete" onclick="data.shared['${sec}'].splice(${i},1);renderAll()">×</button></td></tr>`).join('')}</tbody></table></div><button class="btn sm" style="margin-top:8px" onclick="collectAll();data.shared['${sec}'].push(['','','','',false,'']);renderAll()">+ Add item</button></div></details>`).join('')}
 function markAllShared(sec){collectAll();data.shared[sec].forEach(r=>r[4]=true);renderAll()}
 
 function renderResort(){
-  const rests=[['Garza Blanca Blue','Default breakfast / Mexican','B/L/D','Best default for family meals'],['Hiroshi','Japanese','Dinner','Lighter adult option; check kid tolerance'],['NOI Terrazza Italiana','Italian','Dinner','Easiest dinner win for kids'],['Bocados Steak House','Steakhouse','Dinner','Good extended-family dinner option'],['Food Truck / Pool Bar','Lunch default','Pool-day lunch','Best fit for pool days'],['Rooftop Pool & Bar','Adult-leaning','Adults only','Save for when younger kids are handled'],['24-hr Room Service','Emergency plan','24 hr','Tired kids, naps, arrival/departure chaos'],['The Market & Deli','Grab-and-go','Floor 2','Snacks / coffee runs']];
+  const rests=[['Blanca Blue','Breakfast + dinner · Mexican','6:30a–12p · 6–10:30p','Best default for easy family meals'],['NOI Terrazza Italiana','Italian · dinner','6–10:30 PM','Likely easiest dinner win for kids'],['Bocados Steak House','Steakhouse · dinner','6–10:30 PM','Good extended-family dinner option'],['Hiroshi','Japanese · dinner','6–10:30 PM','Cleaner/lighter adult option; check kids'],['Food Truck / Pool Food','Lunch default','Verify onsite','Best fit for pool days, low-friction'],['The Market & Deli','Grab-and-go · snacks','7a–10:30p','Room snacks, quick breakfast backup'],['Rooftop Pool & Bar','Adults only (18+)','Pool 12–5p · bar 11a–6p','Save for when kids are handled'],['24-hr Room Service','Emergency plan','24 hours','Tired kids, naps, arrival/departure'],['Swim Up Bar','Pool drinks','Verify onsite','Useful near main pool corridor'],['Lobby Bar','Arrival / waiting · Floor 5','Verify onsite','During check-in or lobby waits']];
   document.getElementById('foodDash').innerHTML=rests.map(r=>`<div class="rest"><div style="flex:1"><b>${r[0]}</b><div class="rest-meta"><span class="pill neutral">${r[1]}</span><span style="font-size:12px;color:var(--muted)">${r[2]}</span></div></div><div style="font-size:12px;color:var(--muted);max-width:200px;text-align:right">${r[3]}</div></div>`).join('');
-  const wx=[['Sat','Jun 27','☀️','85°/76°','Arrival'],['Sun','Jun 28','☀️','84°/75°','Pool day'],['Mon','Jun 29','🌤️','85°/76°','Partly sunny'],['Tue','Jun 30','☀️','85°/74°','Sunny'],['Wed','Jul 1','☀️','77°/76°','Lower'],['Thu','Jul 2','☀️','82°/75°','Sunny'],['Fri','Jul 3','☀️','82°/75°','Return']];
+  const wx=[['Sat','Jun 27','☀️','82°/73°','Sunshine'],['Sun','Jun 28','☀️','84°/75°','Plenty sun'],['Mon','Jun 29','🌤️','85°/76°','Partly sunny'],['Tue','Jun 30','☀️','85°/74°','Plenty sun'],['Wed','Jul 1','☀️','77°/76°','Sunshine'],['Thu','Jul 2','☀️','77°/76°','Mostly sunny'],['Fri','Jul 3','❓','TBD','Check closer']];
   document.getElementById('weatherGrid').innerHTML=wx.map(w=>`<div class="wday"><div class="wd">${w[0]}</div><div class="wdate">${w[1]}</div><div class="wi">${w[2]}</div><div class="wt">${w[3]}</div><div class="wn">${w[4]}</div></div>`).join('');
+  const matrix=['Sandcastle building','Face painting','Movie time','Beach volleyball','Treasure hunt','Make a mandala','Video games','Reading club','Dreamcatcher crafts','Just Dance','Bracelet making','DIY keychains','Beach sports','Scavenger hunt'];
+  document.getElementById('kidsMatrix').innerHTML=matrix.map(m=>`<span class="chip">${m}</span>`).join('');
+  const rooms=[['Ron + Paula','King + sofa bed','r0'],['Blake + Andrea + Knox + Zane','Double queen','r1'],['Danielle family (+ Steven, kids)','King + sofa bed + double queen','r2']];
+  document.getElementById('roomBreakout').innerHTML=rooms.map(rm=>`<div class="card" style="box-shadow:none"><div style="font-size:14px;font-weight:800;color:var(--navy)">${rm[0]}</div><div style="font-size:12px;color:var(--muted);margin:4px 0 8px">${rm[1]}</div><label style="font-size:11px;color:var(--muted);font-weight:700">Room #</label><input data-room="${rm[2]}" value="${esc(data.rooms[rm[2]]||'')}" placeholder="Add at check-in" style="margin-top:3px"></div>`).join('');
   document.getElementById('poolToteRows').innerHTML=data.poolTote.map((r,i)=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td><input type="checkbox" ${r[2]?'checked':''} data-pool-tote="${i}"></td></tr>`).join('');
   document.getElementById('onsiteRows').innerHTML=data.onsite.map((r,i)=>`<tr><td><input value="${esc(r[0])}" data-onsite="${i}" data-f="0"></td><td><input value="${esc(r[1])}" data-onsite="${i}" data-f="1"></td><td><input value="${esc(r[2])}" data-onsite="${i}" data-f="2"></td><td><input type="checkbox" ${r[3]?'checked':''} data-onsite="${i}" data-f="3"></td><td><button class="delete" onclick="data.onsite.splice(${i},1);renderAll()">×</button></td></tr>`).join('');
 }
 
-const dogFacilities=[['Firehouse Pet Resort','#1 pick','$490–$525','Excellent','https://firehousepetresort.com/firehouse-pet-resort-round-rock-tx','https://www.google.com/maps/dir/?api=1&origin=2110+Emmett+Parkway+Austin+TX+78728&destination=541+Louis+Henna+Blvd+Round+Rock+TX'],['Camp Bow Wow Austin North','#2','$385–$450+','Excellent','https://www.campbowwow.com/austin/services-pricing/dog-boarding/','https://www.google.com/maps/dir/?api=1&origin=2110+Emmett+Parkway+Austin+TX+78728&destination=13900+N+IH-35+Austin+TX+78728'],['PetSuites Round Rock','#3','$370–$496','Very good','https://roundrock.petsuitesofamerica.com/services/boarding','https://www.google.com/maps/dir/?api=1&origin=2110+Emmett+Parkway+Austin+TX+78728&destination=1401+Louis+Henna+Blvd+Round+Rock+TX'],['Green Acres Pet Ranch','#4 (risky pickup)','~$379+','Risky pickup','https://www.greenacrespetranch.com/overnight-boarding','https://www.google.com/maps/dir/?api=1&origin=2110+Emmett+Parkway+Austin+TX+78728&destination=100+Taylor+Ranch+Rd+Austin+TX']];
-
+const dogFacilities=[
+['Firehouse Pet Resort','BEST OVERALL','18–22 min','$490–$525','Callback received','warn','Excellent — fits 4 PM landing + 6–7 PM pickup','https://firehousepetresort.com/firehouse-pet-resort-round-rock-tx','https://www.google.com/maps/dir/?api=1&origin=2110+Emmett+Parkway+Austin+TX+78728&destination=541+Louis+Henna+Blvd+Round+Rock+TX'],
+['PetSuites Round Rock','FASTEST TO CLOSE','18–22 min','$370–$496','Reservation started','ok','Very good — late pickup may add daycare fee','https://roundrock.petsuitesofamerica.com/services/boarding','https://www.google.com/maps/dir/?api=1&origin=2110+Emmett+Parkway+Austin+TX+78728&destination=1401+Louis+Henna+Blvd+Round+Rock+TX'],
+['Camp Bow Wow Austin North','CLOSEST','5 min','$385–$450+','Interview needed','warn','Excellent schedule; first-time interview adds admin','https://www.campbowwow.com/austin/services-pricing/dog-boarding/','https://www.google.com/maps/dir/?api=1&origin=2110+Emmett+Parkway+Austin+TX+78728&destination=13900+N+IH-35+Austin+TX+78728'],
+['Green Acres Pet Ranch','BEST DOG ENV','25–30 min','~$379+','Not contacted','neutral','Good facility, weaker pickup flexibility','https://www.greenacrespetranch.com/overnight-boarding',''],
+['Dogtopia Round Rock','','20–25 min','$364–$455','Not pursuing','neutral','Works, but daycare-first model','https://www.dogtopia.com/roundrock/pricing/',''],
+['Taurus Academy McNeil','','12 min','Unknown','Fallback','neutral','Close, but less transparent','https://www.taurusacademy.com/locations/mcneil',''],
+['Taurus Academy Metric','','15 min','Unknown','Fallback','neutral','Close enough, not materially better','https://www.taurusacademy.com/locations/metric',''],
+['Austin Pet Ranch','','40–45 min','~$266','Eliminated','bad','Too far + closes too early for 4 PM return','https://austinpetranch.com/',''],
+['Barking Springs Dog Ranch','','40–45 min','$371–$420','Eliminated','bad','Wrong geography','https://www.barkingsprings.com/austin-pricing',''],
+['Bark & Zoom','','35–40 min','Unknown','Eliminated','bad','Airport option; not useful from home','https://www.barkandzoom.com/','']
+];
+const dogActive=[
+['Firehouse Pet Resort','#1 pick','$490–$525','Nancy called from 512-310-7387. Needs account setup + reservation info, then confirms room. Still top fit.'],
+['PetSuites Round Rock','Fastest to close','$370–$496','Reservation started Jun 26 @ 1:00 PM. Deposit required to complete. Agreements signed. Vaccines: DHPP, rabies, bordetella, canine influenza.'],
+['Camp Bow Wow Austin North','Closest','$385–$450+','Melissa called re: Camper Interview. Texted scheduling link. Needs rabies, bordetella, distemper records.'],
+['Green Acres Pet Ranch','Backup','~$379+','Good environment, weaker pickup window. Contact only if top 3 fail.']
+];
 function renderDog(){
-  document.getElementById('dogRows').innerHTML=dogFacilities.map((d,i)=>`<div class="dog-card"><div style="display:flex;align-items:flex-start;gap:12px"><div style="flex:1"><h4>${d[0]} <span class="pill neutral">${d[1]}</span></h4><div class="dog-meta"><span class="pill neutral">${d[2]}</span><span class="pill ${d[3]==='Excellent'?'ok':d[3]==='Very good'?'ok':'warn'}">${d[3]}</span><a href="${d[4]}" target="_blank" style="font-size:12px">Site ↗</a><a href="${d[5]}" target="_blank" style="font-size:12px">Directions ↗</a></div></div><select data-dog-status="${i}" onchange="saveAll()" style="font-size:12px;padding:5px 8px;width:auto"><option>Not contacted</option><option ${data.dogStatus[i]==='Contacted'?'selected':''}>Contacted</option><option ${data.dogStatus[i]==='Waiting'?'selected':''}>Waiting</option><option ${data.dogStatus[i]==='Available'?'selected':''}>Available</option><option ${data.dogStatus[i]==='Booked'?'selected':''}>Booked</option><option ${data.dogStatus[i]==='No'?'selected':''}>No</option></select></div><textarea data-dog-note="${i}" placeholder="Notes..." style="font-size:12px;margin-top:8px">${esc(data.dogNotes[i]||'')}</textarea></div>`).join('');
-  const chks=['Availability Jun 26–Jul 3','Exact total incl. holiday/fees','Jul 3 pickup works 6–7 PM','Vaccine requirements','Food / feeding instructions','First-stay interview or eval'];
+  document.getElementById('dogRows').innerHTML=dogActive.map((d,i)=>`<div class="dog-card"><div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap"><div style="flex:1;min-width:180px"><h4>${d[0]} <span class="pill neutral">${d[1]}</span> <span class="pill info">${d[2]}</span></h4></div><select data-dog-status="${i}" onchange="saveAll()" style="font-size:12px;padding:5px 8px;width:auto;min-width:130px"><option>Not contacted</option><option ${data.dogStatus[i]==='Contacted'?'selected':''}>Contacted</option><option ${data.dogStatus[i]==='Waiting'?'selected':''}>Waiting</option><option ${data.dogStatus[i]==='Interview'?'selected':''}>Interview</option><option ${data.dogStatus[i]==='Deposit pending'?'selected':''}>Deposit pending</option><option ${data.dogStatus[i]==='Available'?'selected':''}>Available</option><option ${data.dogStatus[i]==='Booked'?'selected':''}>Booked</option><option ${data.dogStatus[i]==='No'?'selected':''}>No</option></select></div><div style="font-size:12px;color:var(--muted);margin-top:6px">${d[3]}</div><textarea data-dog-note="${i}" placeholder="Your notes..." style="font-size:12px;margin-top:8px">${esc(data.dogNotes[i]||'')}</textarea></div>`).join('');
+  document.getElementById('dogCompare').innerHTML=dogFacilities.map((d,i)=>`<tr><td style="font-weight:800;color:var(--navy)">${i+1}</td><td><div style="font-weight:700">${d[0]}</div>${d[1]?`<span class="pill info" style="margin-top:3px">${d[1]}</span>`:''}</td><td>${d[2]}</td><td>${d[3]}</td><td><span class="pill ${d[5]}">${d[4]}</span></td><td style="font-size:12px;color:var(--muted);min-width:160px">${d[6]}</td><td style="white-space:nowrap"><a href="${d[7]}" target="_blank">Site</a>${d[8]?` · <a href="${d[8]}" target="_blank">Map</a>`:''}</td></tr>`).join('');
+  const chks=['Availability Jun 26 – Jul 3','Exact total incl. holiday/fees','Jul 3 pickup works 6–7 PM','Vaccine requirements','Food / feeding instructions','First-stay interview or eval'];
   document.getElementById('dogChecklist').innerHTML=chks.map((c,i)=>`<label style="display:flex;align-items:center;gap:8px;padding:10px;background:#fff;border:1px solid var(--border);border-radius:var(--rs);cursor:pointer;font-size:13px"><input type="checkbox" data-dog-check="${i}" ${data.checks['dog_'+i]?'checked':''}>${c}</label>`).join('');
 }
 
 function collectAll(){
   document.querySelectorAll('[data-k]').forEach(i=>data.checks[i.dataset.k]=i.checked);
+  document.querySelectorAll('[data-txt]').forEach(i=>data.txt[i.dataset.txt]=i.value);
+  document.querySelectorAll('[data-room]').forEach(i=>data.rooms[i.dataset.room]=i.value);
   document.querySelectorAll('[data-shop]').forEach(i=>{const r=data.shopping[+i.dataset.shop],f=+i.dataset.f;r[f]=i.type==='checkbox'?i.checked:i.value});
   document.querySelectorAll('[data-person]').forEach(i=>{const r=data.people[i.dataset.person][+i.dataset.i],f=+i.dataset.f;r[f]=i.type==='checkbox'?i.checked:i.value});
   document.querySelectorAll('[data-shared]').forEach(i=>{const r=data.shared[i.dataset.shared][+i.dataset.i],f=+i.dataset.f;r[f]=i.type==='checkbox'?i.checked:i.value});
@@ -622,34 +616,24 @@ function calc(){
   let t=0,d=0;
   Object.entries(data.people).forEach(([p,items])=>{const x=items.filter(i=>i[3]).length;t+=items.length;d+=x;const e=document.getElementById(p+'Stat');if(e)e.textContent=`${x}/${items.length}`});
   Object.entries(data.shared).forEach(([s,items])=>{const x=items.filter(i=>i[4]).length;t+=items.length;d+=x;const e=document.getElementById(s+'Stat');if(e)e.textContent=`${x}/${items.length}`});
-  const shopOpen=data.shopping.filter(x=>!(x[4]&&x[5]&&x[6])).length,ordered=data.shopping.filter(x=>x[4]).length,maybe=data.shopping.filter(x=>['Maybe','Optional','Essential'].includes(x[3])&&!x[4]).length,pct=t?Math.round(d/t*100):0;
+  const ordered=data.shopping.filter(x=>x[3]==='Ordered').length,maybe=data.shopping.filter(x=>['Maybe','Optional','Essential'].includes(x[3])).length,open=data.shopping.filter(x=>x[3]==='Essential').length,pct=t?Math.round(d/t*100):0;
   document.getElementById('overallPacked').textContent=pct+'%';
   document.getElementById('packedItems').textContent=`${d} / ${t} items`;
-  document.getElementById('shoppingOpen').textContent=shopOpen;
+  document.getElementById('shoppingOpen').textContent=open;
   document.getElementById('orderedCount').textContent=ordered;
   document.getElementById('maybeCount').textContent=maybe;
-  const sst=document.getElementById('shopStatusText');sst.textContent=shopOpen?`${shopOpen} open`:'Complete';sst.className='pill '+(shopOpen?'bad':'ok');
-  const ready=Math.round((100+100+65+(shopOpen?75:100)+pct+50)/6);
+  const sst=document.getElementById('shopStatusText');sst.textContent=open?`${open} essential open`:'Essentials done';sst.className='pill '+(open?'bad':'ok');
+  const ready=Math.round((100+100+65+(open?75:100)+pct+50)/6);
   document.getElementById('readinessPct').textContent=ready+'%';
   document.getElementById('readinessBar').style.width=ready+'%';
   document.getElementById('overallPackedBar').style.width=pct+'%';
-  document.getElementById('criticalCount').textContent=[!data.checks.order_dog,!data.checks.order_transfer,!data.checks.order_docs,shopOpen>0].filter(Boolean).length;
+  document.getElementById('criticalCount').textContent=[!data.checks.order_dog,!data.checks.order_transfer,!data.checks.order_docs,open>0].filter(Boolean).length;
 }
 
-function renderAll(){
-  renderShopping();renderPeople();renderShared();renderResort();renderDog();calc();daysUntil();
-  document.querySelectorAll('[data-k]').forEach(i=>i.checked=!!data.checks[i.dataset.k]);
-}
+function renderAll(){renderShopping();renderPeople();renderShared();renderResort();renderDog();calc();daysUntil();document.querySelectorAll('[data-k]').forEach(i=>i.checked=!!data.checks[i.dataset.k]);document.querySelectorAll('[data-txt]').forEach(i=>{if(data.txt[i.dataset.txt]!==undefined&&data.txt[i.dataset.txt]!=='')i.value=data.txt[i.dataset.txt]})}
 
-function filterPacking(type,btn){
-  if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
-  document.querySelectorAll('.person-card').forEach(c=>c.classList.toggle('hide',!(type==='all'||type===c.dataset.type)));
-  document.querySelectorAll('[data-sharedsec]').forEach(d=>d.style.display=(['pool','toiletries','travel','room'].includes(type)&&d.dataset.sharedsec!==type)?'none':'');
-}
-function showOutstandingOnly(btn){
-  if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
-  document.querySelectorAll('#personCards tr,#sharedSections tr').forEach(tr=>{const cb=tr.querySelector('input[type=checkbox]');if(cb)tr.style.display=cb.checked?'none':''});
-}
+function filterPacking(type,btn){if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}document.querySelectorAll('.person-card').forEach(c=>c.classList.toggle('hide',!(type==='all'||type===c.dataset.type)));document.querySelectorAll('[data-sharedsec]').forEach(d=>d.style.display=(['pool','toiletries','travel','room'].includes(type)&&d.dataset.sharedsec!==type)?'none':'')}
+function showOutstandingOnly(btn){if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}document.querySelectorAll('#personCards tr,#sharedSections tr').forEach(tr=>{const cb=tr.querySelector('input[type=checkbox]');if(cb)tr.style.display=cb.checked?'none':''})}
 
 function exportData(){collectAll();const b=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='cabo2026_'+new Date().toISOString().slice(0,10)+'.json';a.click()}
 function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{data=merge(defaults,JSON.parse(ev.target.result));saveAll();alert('Imported!')}catch(err){alert('Import failed: '+err.message)}};r.readAsText(f)}
