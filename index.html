@@ -154,7 +154,11 @@ details .inner{padding:0 16px 16px}
 .subnav button:hover{color:var(--hd)}
 .subnav button.active{background:var(--navy);color:#fff}
 .subview{display:none}.subview.active{display:block;animation:fade .22s ease}
-.rhero{background:linear-gradient(135deg,#0d2137 0%,#0d7a6e 65%,#0284c7 120%);border-radius:var(--r);padding:22px;color:#fff;box-shadow:var(--sh2);margin-bottom:16px}
+.rhero{position:relative;background:#0d2137 center 32%/cover no-repeat;background-image:linear-gradient(180deg,rgba(13,33,55,.15) 0%,rgba(13,33,55,.55) 55%,rgba(13,33,55,.9) 100%),url('hero.jpg');border-radius:var(--r);padding:20px;color:#fff;box-shadow:var(--sh2);margin-bottom:16px;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end}
+.mapimg{width:100%;border-radius:var(--r);border:1px solid var(--border);display:block;cursor:zoom-in}
+.kidrow{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--border)}
+.kidrow:last-child{border-bottom:none}
+.kidav{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;color:#fff}
 .rhero .rname{font-size:23px;font-weight:800;letter-spacing:-.02em}
 .rhero .rloc{font-size:13px;opacity:.9;margin-top:3px;display:flex;align-items:center;gap:6px}
 .statrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
@@ -364,6 +368,8 @@ a:hover{text-decoration:underline}
       <div class="card mb14"><div class="ctitle">Seat assignments — Row 25 (same both ways)</div><div class="seat-grid" id="seatGrid"></div></div>
       <div class="card mb14"><div class="ctitle">Passenger details</div><div class="tw"><table><thead><tr><th>Name</th><th>Seat</th><th>Confirmation</th><th>Rapid Rewards</th><th>Docs</th></tr></thead><tbody id="passengerRows"></tbody></table></div></div>
 
+      <div class="alert info">👪 Extended family (Ron, Paula, Blake, Andrea, Knox &amp; Zane) is on an <b>earlier flight</b>, arriving SJD ~9:00 AM — a few hours ahead of your 12:25 PM landing. Andrea has the airport transfers arranged both ways.</div>
+
       <div class="tabs">
         <button class="tab active" onclick="setTripDay('outbound',this)">Outbound day (Jun 27)</button>
         <button class="tab" onclick="setTripDay('return',this)">Return day (Jul 3)</button>
@@ -472,6 +478,12 @@ a:hover{text-decoration:underline}
         </div>
 
         <div class="card mb14">
+          <div class="sh"><div class="ctitle" style="margin:0">Property map — pools &amp; restaurants</div><a class="btn sm" href="resort-map.jpg" target="_blank">Full size ↗</a></div>
+          <a href="resort-map.jpg" target="_blank"><img class="mapimg" src="resort-map.jpg" alt="Garza Blanca property map with numbered pools and lettered restaurants" loading="lazy"></a>
+          <p style="font-size:11px;color:var(--muted);margin-top:8px">Numbered circles = pools (1–8) · lettered circles = dining venues · Towers 1–4 along the beach.</p>
+        </div>
+
+        <div class="card mb14">
           <div class="ctitle">Ask at arrival</div>
           <div class="g c2">
             <div class="kv-row"><span class="k">Kids Club</span><span class="v">Daily schedule + signup</span></div>
@@ -503,24 +515,36 @@ a:hover{text-decoration:underline}
 
       <!-- Pools & Beach -->
       <div class="subview" data-sub="resort" data-name="pools">
+        <div class="alert warn">🛟 Swim watch — Levon (3) needs 100% supervision in water. Gibson (5) is practicing strokes. Olive (8) &amp; June (6) are strong swimmers.</div>
         <div class="g c2 mb14">
           <div class="card"><div class="ctitle">Pool system — 8 pools</div><div id="poolsList"></div>
-            <p style="font-size:11px;color:var(--muted);margin-top:8px">Beach is available but surf can be real — pool stays the default base with kids.</p>
+            <p style="font-size:11px;color:var(--muted);margin-top:8px">Kids Pool (#2) is the default base. Beach is available but surf can be real.</p>
           </div>
           <div class="card"><div class="ctitle">Pool tote — pack &amp; go</div>
             <div class="tw"><table><thead><tr><th>Item</th><th>Qty</th><th>Packed</th></tr></thead><tbody id="poolToteRows"></tbody></table></div>
           </div>
         </div>
+        <div class="card">
+          <div class="sh"><div class="ctitle" style="margin:0">Pool map</div><a class="btn sm" href="resort-map.jpg" target="_blank">Full size ↗</a></div>
+          <a href="resort-map.jpg" target="_blank"><img class="mapimg" src="resort-map.jpg" alt="Resort pool map" loading="lazy"></a>
+        </div>
       </div>
 
       <!-- Kids Club -->
       <div class="subview" data-sub="resort" data-name="kids">
-        <div class="card mb14"><div class="ctitle">Kids Club</div>
-          <div class="g c2">
+        <div class="g c2 mb14">
+          <div class="card"><div class="ctitle">Kids Club</div>
             <div class="kv-row"><span class="k">Hours</span><span class="v">9:00 AM – 5:00 PM</span></div>
             <div class="kv-row"><span class="k">Ages</span><span class="v">4–12</span></div>
             <div class="kv-row"><span class="k">Supervision</span><span class="v">Certified bilingual staff</span></div>
             <div class="kv-row"><span class="k">Under 4 / after hours</span><span class="v">Paid babysitting — confirm</span></div>
+          </div>
+          <div class="card"><div class="ctitle">Our kids — Kids Club fit</div>
+            <div class="kidrow"><div class="kidav" style="background:#7F77DD">O</div><div style="flex:1"><div style="font-weight:700;color:var(--hd);font-size:14px">Olive · 8</div><div style="font-size:12px;color:var(--muted)">Strong swimmer · turns 9 in July</div></div><span class="pill ok">Kids Club</span></div>
+            <div class="kidrow"><div class="kidav" style="background:#1D9E75">J</div><div style="flex:1"><div style="font-weight:700;color:var(--hd);font-size:14px">June · 6</div><div style="font-size:12px;color:var(--muted)">Strong swimmer · turns 7 in July</div></div><span class="pill ok">Kids Club</span></div>
+            <div class="kidrow"><div class="kidav" style="background:#D85A30">G</div><div style="flex:1"><div style="font-weight:700;color:var(--hd);font-size:14px">Gibson · 5</div><div style="font-size:12px;color:var(--muted)">Practicing strokes · turns 6 in Aug</div></div><span class="pill ok">Kids Club</span></div>
+            <div class="kidrow"><div class="kidav" style="background:#378ADD">L</div><div style="flex:1"><div style="font-weight:700;color:var(--hd);font-size:14px">Levon · 3</div><div style="font-size:12px;color:var(--muted)">100% supervision · turns 4 in Nov</div></div><span class="pill warn">Babysitting</span></div>
+            <p style="font-size:11px;color:var(--muted);margin-top:8px">Olive &amp; June have July birthdays — ask the resort about a kids' celebration.</p>
           </div>
         </div>
         <div class="card"><div class="ctitle">Activity menu — "Little Luxuries"</div><div class="chips" id="kidsMatrix" style="margin-top:4px"></div></div>
@@ -528,29 +552,43 @@ a:hover{text-decoration:underline}
 
       <!-- Rooms & Setup -->
       <div class="subview" data-sub="resort" data-name="rooms">
+        <div class="alert warn">⚠ Rooms are <b>not connecting</b> and proximity can't be locked until check-in. The original connected 2-bedroom suite is no longer available — your family of 6 is now split across two same-category rooms.</div>
+
+        <div class="g c2 mb14">
+          <div class="card">
+            <div class="sh"><div style="font-size:15px;font-weight:800;color:var(--hd)">Room 1 · King + sofa bed</div><span class="pill info">Parents + Levon</span></div>
+            <div style="font-size:13px;color:var(--text);margin:4px 0 10px">Danielle · Steven · Levon (3, needs supervision). Sofa bed as spare / overflow.</div>
+            <label style="font-size:11px;color:var(--muted);font-weight:700">Room number (add at check-in)</label>
+            <input data-room="r0" placeholder="e.g. Tower 2 · 415" style="margin-top:4px">
+          </div>
+          <div class="card">
+            <div class="sh"><div style="font-size:15px;font-weight:800;color:var(--hd)">Room 2 · Double queen</div><span class="pill info">Big kids</span></div>
+            <div style="font-size:13px;color:var(--text);margin:4px 0 10px">Olive (8) · June (6) · Gibson (5) — two queen beds.</div>
+            <label style="font-size:11px;color:var(--muted);font-weight:700">Room number (add at check-in)</label>
+            <input data-room="r1" placeholder="e.g. Tower 2 · 417" style="margin-top:4px">
+          </div>
+        </div>
+
         <div class="card mb14">
-          <div class="ctitle">Our rooms — breakout</div>
-          <div class="g c3" id="roomBreakout"></div>
-          <div style="margin-top:12px" class="g c3">
-            <div class="alert info" style="margin:0">🛏 Parents / Levon — diapers, wipes, meds, bedtime basics</div>
-            <div class="alert info" style="margin:0">👧 Girls room — brush, hair ties, detangler, toothbrushes</div>
-            <div class="alert info" style="margin:0">🧳 Shared ops — laundry bags, hooks, clothesline, shoe bags</div>
+          <div class="ctitle">Sleeping &amp; setup plan (editable)</div>
+          <textarea data-txt="sleepPlan" placeholder="Adjust who sleeps where once rooms are assigned..." style="min-height:64px">Room 1 (King + sofa): Danielle + Steven in king, Levon in pack-n-play / with parents. Room 2 (Double queen): Olive + June share, Gibson in 2nd queen. Diapers, wipes, meds, bedtime basics in Room 1; brush, hair ties, detangler, toothbrushes in Room 2.</textarea>
+          <div style="margin-top:10px" class="g c2">
+            <div class="alert info" style="margin:0">🧳 Shared room ops — laundry bags, hooks, clothesline, shoe bags split across both rooms</div>
+            <div class="alert info" style="margin:0">📍 At check-in — ask for the two family rooms as close together as possible</div>
           </div>
         </div>
 
         <div class="g c2 mb14">
+          <div class="card"><div class="ctitle">Group room inventory (Andrea)</div>
+            <div class="roomcat"><span class="rc-name">2 × King + sofa bed</span><span class="rc-spec">same category</span></div>
+            <div class="roomcat"><span class="rc-name">2 × Double queen</span><span class="rc-spec">same category</span></div>
+            <p style="font-size:11px;color:var(--muted);margin-top:8px">4 rooms total for the whole group (Ron &amp; Paula · Blake, Andrea, Knox &amp; Zane · your family of 6 across 2). Connecting rooms unavailable.</p>
+          </div>
           <div class="card"><div class="ctitle">Tower room ranges</div>
             <div class="kv-row"><span class="k">Tower 1</span><span class="v">201–1027</span></div>
             <div class="kv-row"><span class="k">Tower 2</span><span class="v">229–931</span></div>
             <div class="kv-row"><span class="k">Tower 3</span><span class="v">332–838</span></div>
             <div class="kv-row"><span class="k">Tower 4</span><span class="v">239–1042</span></div>
-          </div>
-          <div class="card"><div class="ctitle">Suite types (reference)</div>
-            <div class="roomcat"><span class="rc-name">Junior Suite</span><span class="rc-spec">667 sq ft · sleeps 3</span></div>
-            <div class="roomcat"><span class="rc-name">One Bedroom Suite</span><span class="rc-spec">1,313 sq ft · sleeps 4</span></div>
-            <div class="roomcat"><span class="rc-name">Two Bedroom Suite</span><span class="rc-spec">1,980 sq ft · sleeps 6</span></div>
-            <div class="roomcat"><span class="rc-name">3-Bed Oceanfront Residence</span><span class="rc-spec">butler service</span></div>
-            <div class="roomcat"><span class="rc-name">Lofts &amp; Penthouse</span><span class="rc-spec">3–4 bedroom</span></div>
           </div>
         </div>
 
@@ -704,8 +742,6 @@ function renderResort(){
   document.getElementById('weatherGrid').innerHTML=wx.map(w=>`<div class="wday"><div class="wd">${w[0]}</div><div class="wdate">${w[1]}</div><div class="wi">${w[2]}</div><div class="wt">${w[3]}</div><div class="wn">${w[4]}</div></div>`).join('');
   const matrix=['Sandcastle building','Face painting','Movie time','Beach volleyball','Treasure hunt','Make a mandala','Video games','Reading club','Dreamcatcher crafts','Just Dance','Bracelet making','DIY keychains','Beach sports','Scavenger hunt'];
   document.getElementById('kidsMatrix').innerHTML=matrix.map(m=>`<span class="chip">${m}</span>`).join('');
-  const rooms=[['Ron + Paula','King + sofa bed','r0'],['Blake + Andrea + Knox + Zane','Double queen','r1'],['Danielle family (+ Steven, kids)','King + sofa bed + double queen','r2']];
-  document.getElementById('roomBreakout').innerHTML=rooms.map(rm=>`<div class="card" style="box-shadow:none"><div style="font-size:14px;font-weight:800;color:var(--hd)">${rm[0]}</div><div style="font-size:12px;color:var(--muted);margin:4px 0 8px">${rm[1]}</div><label style="font-size:11px;color:var(--muted);font-weight:700">Room #</label><input data-room="${rm[2]}" value="${esc(data.rooms[rm[2]]||'')}" placeholder="Add at check-in" style="margin-top:3px"></div>`).join('');
   document.getElementById('poolToteRows').innerHTML=data.poolTote.map((r,i)=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td><input type="checkbox" ${r[2]?'checked':''} data-pool-tote="${i}"></td></tr>`).join('');
   document.getElementById('onsiteRows').innerHTML=data.onsite.map((r,i)=>`<tr><td><input value="${esc(r[0])}" data-onsite="${i}" data-f="0"></td><td><input value="${esc(r[1])}" data-onsite="${i}" data-f="1"></td><td><input value="${esc(r[2])}" data-onsite="${i}" data-f="2"></td><td><input type="checkbox" ${r[3]?'checked':''} data-onsite="${i}" data-f="3"></td><td><button class="delete" onclick="data.onsite.splice(${i},1);renderAll()">×</button></td></tr>`).join('');
 }
@@ -767,7 +803,7 @@ function calc(){
   set('criticalCount',[!data.checks.order_dog,!data.checks.order_transfer,!data.checks.order_docs,open>0].filter(Boolean).length);
 }
 
-function renderAll(){renderShopping();renderPeople();renderShared();renderResort();renderDog();calc();daysUntil();document.querySelectorAll('[data-k]').forEach(i=>i.checked=!!data.checks[i.dataset.k]);document.querySelectorAll('[data-txt]').forEach(i=>{if(data.txt[i.dataset.txt]!==undefined&&data.txt[i.dataset.txt]!=='')i.value=data.txt[i.dataset.txt]})}
+function renderAll(){renderShopping();renderPeople();renderShared();renderResort();renderDog();calc();daysUntil();document.querySelectorAll('[data-k]').forEach(i=>i.checked=!!data.checks[i.dataset.k]);document.querySelectorAll('[data-txt]').forEach(i=>{if(data.txt[i.dataset.txt]!==undefined&&data.txt[i.dataset.txt]!=='')i.value=data.txt[i.dataset.txt]});document.querySelectorAll('[data-room]').forEach(i=>{if(data.rooms[i.dataset.room])i.value=data.rooms[i.dataset.room]})}
 
 function filterPacking(type,btn){if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}document.querySelectorAll('.person-card').forEach(c=>c.classList.toggle('hide',!(type==='all'||type===c.dataset.type)));document.querySelectorAll('[data-sharedsec]').forEach(d=>d.style.display=(['pool','toiletries','travel','room'].includes(type)&&d.dataset.sharedsec!==type)?'none':'')}
 function showOutstandingOnly(btn){if(btn){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}document.querySelectorAll('#personCards tr,#sharedSections tr').forEach(tr=>{const cb=tr.querySelector('input[type=checkbox]');if(cb)tr.style.display=cb.checked?'none':''})}
