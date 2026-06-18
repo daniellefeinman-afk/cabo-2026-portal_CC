@@ -156,6 +156,22 @@ details .inner{padding:0 16px 16px}
 .subview{display:none}.subview.active{display:block;animation:fade .22s ease}
 .rhero{position:relative;background:#0d2137 center 32%/cover no-repeat;background-image:linear-gradient(180deg,rgba(13,33,55,.15) 0%,rgba(13,33,55,.55) 55%,rgba(13,33,55,.9) 100%),url('hero.jpg');border-radius:var(--r);padding:20px;color:#fff;box-shadow:var(--sh2);margin-bottom:16px;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end}
 .mapimg{width:100%;border-radius:var(--r);border:1px solid var(--border);display:block;cursor:zoom-in}
+.cmd{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#0d2137 0%,#0d7a6e 70%,#0284c7 125%);border-radius:var(--r);padding:20px 22px;color:#fff;box-shadow:var(--sh2);margin-bottom:16px}
+.cmd-eyebrow{font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;opacity:.72}
+.cmd-days b{font-size:46px;font-weight:800;letter-spacing:-.04em;line-height:1;margin-right:7px}
+.cmd-days span{font-size:14px;font-weight:700;opacity:.9}
+.cmd-date{font-size:13px;opacity:.9;margin-top:6px}
+.cmd-r{flex:1;min-width:230px}
+.cmd-rlbl{font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;opacity:.85}
+.cmd-ready{font-size:30px;font-weight:800;letter-spacing:-.03em}
+.cmd-sub{font-size:13px;opacity:.92;margin-top:9px;font-weight:600}
+.taskcard{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-left:4px solid #d97706;border-radius:var(--r);padding:14px 15px;box-shadow:var(--sh);transition:opacity .2s}
+.taskcard:has(input:checked){border-left-color:var(--ok);opacity:.55}
+.taskcard:has(input:checked) .tc-title{text-decoration:line-through}
+.taskcard input[type=checkbox]{width:20px;height:20px;margin-top:2px}
+.tc-body{flex:1}
+.tc-title{font-size:15px;font-weight:800;color:var(--hd)}
+.tc-sub{font-size:12px;color:var(--muted);margin:2px 0 9px}
 .kidrow{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--border)}
 .kidrow:last-child{border-bottom:none}
 .kidav{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;color:#fff}
@@ -259,21 +275,28 @@ a:hover{text-decoration:underline}
 
     <!-- DASHBOARD -->
     <section class="page active" id="dashboard">
-      <div class="g c4 mb14">
-        <div class="card kpi"><div class="kl">Readiness</div><div class="kv" id="readinessPct">–</div><div class="ptrack"><div class="pfill" id="readinessBar" style="width:0%"></div></div></div>
-        <div class="card kpi accent-blue"><div class="kl">Packing</div><div class="kv" id="overallPacked">–</div><div class="ks" id="packedItems">– items</div><div class="ptrack"><div class="pfill" id="overallPackedBar" style="width:0%"></div></div></div>
-        <div class="card kpi accent-amber"><div class="kl">Shopping open</div><div class="kv" id="dashShopOpen">–</div><div class="ks">essential items</div></div>
-        <div class="card kpi accent-red"><div class="kl">Open tasks</div><div class="kv" id="criticalCount">–</div><div class="ks">critical items</div></div>
+      <div class="cmd">
+        <div>
+          <div class="cmd-eyebrow">Countdown to Cabo</div>
+          <div class="cmd-days"><b id="dDays">–</b><span>days to go</span></div>
+          <div class="cmd-date">Sat Jun 27 – Fri Jul 3, 2026 · 6 nights</div>
+        </div>
+        <div class="cmd-r">
+          <div style="display:flex;justify-content:space-between;align-items:baseline"><span class="cmd-rlbl">Trip readiness</span><b class="cmd-ready" id="dReady">–%</b></div>
+          <div class="ptrack" style="background:rgba(255,255,255,.22);margin-top:8px"><div class="pfill" id="dReadyBar" style="width:0%"></div></div>
+          <div class="cmd-sub" id="dTasksLeft">– tasks left before you go</div>
+        </div>
+      </div>
+
+      <div class="sh"><div class="sectitle" style="margin:0">What's left before Cabo</div><span class="pill bad" id="leftCount" style="font-size:12px">–</span></div>
+      <div class="g c2 mb14">
+        <div class="taskcard"><input type="checkbox" data-k="order_shopping"><div class="tc-body"><div class="tc-title">Buy the essentials</div><div class="tc-sub">Umbrella stroller · snorkel gear · Gibson sandals · June water shoes</div><button class="btn sm" onclick="goShop()">Open shopping list →</button></div></div>
+        <div class="taskcard"><input type="checkbox" data-k="order_transfer"><div class="tc-body"><div class="tc-title">Get transfer details from Andrea</div><div class="tc-sub">Company · SJD meeting point · return pickup time</div><button class="btn sm" onclick="navTo('travel')">Open travel →</button></div></div>
+        <div class="taskcard"><input type="checkbox" data-k="order_dog"><div class="tc-body"><div class="tc-title">Select &amp; book dog boarding</div><div class="tc-sub">Confirm Firehouse, else pay the PetSuites deposit</div><button class="btn sm" onclick="navTo('dog')">Open dog hub →</button></div></div>
+        <div class="taskcard"><input type="checkbox" data-k="order_docs"><div class="tc-body"><div class="tc-title">Add passports to Southwest</div><div class="tc-sub">All 6 travelers show "passport info needs attention"</div><a class="btn sm" href="https://www.southwest.com/air/manage-reservation/" target="_blank">Southwest manage ↗</a></div></div>
       </div>
 
       <div class="g c2 mb14">
-        <div class="card">
-          <div class="ctitle">Today's operating orders</div>
-          <label class="checkrow"><input type="checkbox" data-k="order_dog"><div><div class="cr-label">Close dog boarding</div><div class="cr-sub">Book Firehouse, else pay PetSuites deposit</div></div></label>
-          <label class="checkrow"><input type="checkbox" data-k="order_transfer"><div><div class="cr-label">Get transfer details from Andrea</div><div class="cr-sub">Company · SJD meeting point · return pickup time</div></div></label>
-          <label class="checkrow"><input type="checkbox" data-k="order_docs"><div><div class="cr-label">Fix Southwest passport alerts</div><div class="cr-sub">All 6 travelers show "needs attention"</div></div></label>
-          <label class="checkrow"><input type="checkbox" data-k="order_shopping"><div><div class="cr-label">Close essential shopping</div><div class="cr-sub">Stroller decision · Gibson sandals · June water shoes</div></div></label>
-        </div>
         <div class="card">
           <div class="ctitle">Critical path</div>
           <div class="kv-row"><span class="k">Flights</span><span class="v"><span class="pill ok">Booked</span></span></div>
@@ -282,6 +305,20 @@ a:hover{text-decoration:underline}
           <div class="kv-row"><span class="k">SJD transfers</span><span class="v"><span class="pill warn">Details pending</span></span></div>
           <div class="kv-row"><span class="k">Dog boarding</span><span class="v"><span class="pill warn">Waiting</span></span></div>
           <div class="kv-row"><span class="k">Passports</span><span class="v"><span class="pill warn">Update SW</span></span></div>
+        </div>
+        <div class="card">
+          <div class="ctitle">Confirmation codes</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:2px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+              <div><div style="font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.07em">WN627 · Danielle + Levon</div><div style="font-size:20px;font-weight:800;font-family:ui-monospace,monospace;color:var(--hd);letter-spacing:.06em">ACYITW</div></div>
+              <button class="copy-btn" onclick="copyCode('ACYITW',this)">Copy</button>
+            </div>
+            <div style="border-top:1px solid var(--border);padding-top:10px;display:flex;justify-content:space-between;align-items:center;gap:10px">
+              <div><div style="font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.07em">WN627 · Steven + kids</div><div style="font-size:20px;font-weight:800;font-family:ui-monospace,monospace;color:var(--hd);letter-spacing:.06em">ACWDMM</div></div>
+              <button class="copy-btn" onclick="copyCode('ACWDMM',this)">Copy</button>
+            </div>
+            <button class="btn sm" onclick="navTo('confirmations')" style="margin-top:2px">All confirmations →</button>
+          </div>
         </div>
       </div>
 
@@ -300,34 +337,16 @@ a:hover{text-decoration:underline}
         </div>
       </div>
 
-      <div class="g c2 mb14">
-        <div class="card">
-          <div class="ctitle">Confirmation codes</div>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:2px">
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-              <div><div style="font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.07em">WN627 · Danielle + Levon</div><div style="font-size:20px;font-weight:800;font-family:ui-monospace,monospace;color:var(--hd);letter-spacing:.06em">ACYITW</div></div>
-              <button class="copy-btn" onclick="copyCode('ACYITW',this)">Copy</button>
-            </div>
-            <div style="border-top:1px solid var(--border);padding-top:10px;display:flex;justify-content:space-between;align-items:center;gap:10px">
-              <div><div style="font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.07em">WN627 · Steven + kids</div><div style="font-size:20px;font-weight:800;font-family:ui-monospace,monospace;color:var(--hd);letter-spacing:.06em">ACWDMM</div></div>
-              <button class="copy-btn" onclick="copyCode('ACWDMM',this)">Copy</button>
-            </div>
-            <button class="btn sm" onclick="navTo('confirmations')" style="margin-top:2px">All confirmations →</button>
-          </div>
+      <div class="card mb14">
+        <div class="sh"><div class="ctitle" style="margin:0">Shopping snapshot</div><span class="pill" id="shopStatusText" style="background:var(--info-bg);color:var(--info)">–</span></div>
+        <div style="display:flex;gap:20px;margin-bottom:12px">
+          <div><div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Open</div><div style="font-size:20px;font-weight:800;color:var(--hd)" id="shoppingOpen">–</div></div>
+          <div><div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Ordered</div><div style="font-size:20px;font-weight:800;color:var(--ok)" id="orderedCount">–</div></div>
+          <div><div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Maybe</div><div style="font-size:20px;font-weight:800;color:var(--warn)" id="maybeCount">–</div></div>
         </div>
-        <div class="card">
-          <div class="sh"><div class="ctitle" style="margin:0">Shopping</div><span class="pill" id="shopStatusText" style="background:var(--info-bg);color:var(--info)">–</span></div>
-          <div style="display:flex;gap:16px;margin-bottom:12px">
-            <div><div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Open</div><div style="font-size:20px;font-weight:800;color:var(--hd)" id="shoppingOpen">–</div></div>
-            <div><div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Ordered</div><div style="font-size:20px;font-weight:800;color:var(--ok)" id="orderedCount">–</div></div>
-            <div><div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Maybe</div><div style="font-size:20px;font-weight:800;color:var(--warn)" id="maybeCount">–</div></div>
-          </div>
-          <table style="font-size:12px"><tbody id="shoppingMiniRows"></tbody></table>
-          <button class="btn sm" style="margin-top:10px" onclick="navTo('packing')">Packing hub →</button>
-        </div>
+        <table style="font-size:12px"><tbody id="shoppingMiniRows"></tbody></table>
+        <button class="btn sm" style="margin-top:10px" onclick="goShop()">Open shopping list →</button>
       </div>
-
-      <div class="alert warn">⚠ Passport info must be added to Southwest reservations for all 6 travelers. &nbsp;·&nbsp; Dog boarding + SJD transfer details still open.</div>
     </section>
 
     <!-- CONFIRMATIONS -->
@@ -713,7 +732,8 @@ function saveAll(){collectAll();localStorage.setItem('caboPortal_v2',JSON.string
 
 function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.navlink').forEach(b=>b.classList.remove('active'));if(btn){btn.classList.add('active');btn.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'})}window.scrollTo({top:0,behavior:'smooth'})}
 function navTo(id){showPage(id,document.querySelector(`.navlink[onclick*="'${id}'"]`))}
-function daysUntil(){const x=Math.ceil((new Date('2026-06-27')-new Date())/86400000);const v=x>0?x:0;const e=document.getElementById('daysChip');if(e)e.textContent=v}
+function daysUntil(){const x=Math.ceil((new Date('2026-06-27')-new Date())/86400000);const v=x>0?x:0;const e=document.getElementById('daysChip');if(e)e.textContent=v;const d=document.getElementById('dDays');if(d)d.textContent=v}
+function goShop(){navTo('packing');const b=[...document.querySelectorAll('#packing .subnav button')].find(x=>/Shopping/.test(x.textContent));subView('pack','shop',b)}
 function copyCode(code,btn){const orig=btn.textContent;navigator.clipboard.writeText(code).then(()=>{btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied')},2000)}).catch(()=>{const t=document.createElement('textarea');t.value=code;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);btn.textContent='Copied!';setTimeout(()=>btn.textContent=orig,2000)})}
 
 const passengers=[['Steven','25A Window','ACWDMM','113228581'],['Olive','25B Middle','ACWDMM','—'],['June','25C Aisle','ACWDMM','—'],['Gibson','25D Aisle','ACWDMM','—'],['Danielle','25E Middle','ACYITW','20602391143'],['Levon','25F Window','ACYITW','—']];
@@ -798,9 +818,13 @@ function calc(){
   const toBuy=data.shopping.filter(x=>x[3]!=='Ordered').length;const sb=document.getElementById('shopBadge');if(sb){sb.textContent=toBuy;sb.className='pill '+(open?'bad':toBuy?'warn':'ok')}
   setw('m_overallBar',pct+'%');
   const sst=document.getElementById('shopStatusText');if(sst){sst.textContent=open?`${open} essential open`:'Essentials done';sst.className='pill '+(open?'bad':'ok')}
-  const ready=Math.round((100+100+65+(open?75:100)+pct+50)/6);
-  set('readinessPct',ready+'%');setw('readinessBar',ready+'%');setw('overallPackedBar',pct+'%');
-  set('criticalCount',[!data.checks.order_dog,!data.checks.order_transfer,!data.checks.order_docs,open>0].filter(Boolean).length);
+  const dogD=!!data.checks.order_dog,trD=!!data.checks.order_transfer,docD=!!data.checks.order_docs,shopD=!!data.checks.order_shopping||open===0;
+  const tasksLeft=4-[dogD,trD,docD,shopD].filter(Boolean).length;
+  const ready=Math.round((3+dogD+trD+docD+shopD+pct/100)/8*100);
+  set('dReady',ready+'%');setw('dReadyBar',ready+'%');
+  set('dTasksLeft',tasksLeft===0?"All set — you're ready for Cabo! 🌊":`${tasksLeft} task${tasksLeft>1?'s':''} left before you go`);
+  const lc=document.getElementById('leftCount');if(lc){lc.textContent=tasksLeft===0?'All done':tasksLeft+' left';lc.className='pill '+(tasksLeft?'bad':'ok')}
+  set('readinessPct',ready+'%');setw('readinessBar',ready+'%');setw('overallPackedBar',pct+'%');set('criticalCount',tasksLeft);
 }
 
 function renderAll(){renderShopping();renderPeople();renderShared();renderResort();renderDog();calc();daysUntil();document.querySelectorAll('[data-k]').forEach(i=>i.checked=!!data.checks[i.dataset.k]);document.querySelectorAll('[data-txt]').forEach(i=>{if(data.txt[i.dataset.txt]!==undefined&&data.txt[i.dataset.txt]!=='')i.value=data.txt[i.dataset.txt]});document.querySelectorAll('[data-room]').forEach(i=>{if(data.rooms[i.dataset.room])i.value=data.rooms[i.dataset.room]})}
