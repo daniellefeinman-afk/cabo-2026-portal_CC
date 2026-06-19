@@ -154,7 +154,7 @@ details .inner{padding:0 16px 16px}
 .subnav button:hover{color:var(--hd)}
 .subnav button.active{background:var(--navy);color:#fff}
 .subview{display:none}.subview.active{display:block;animation:fade .22s ease}
-.rhero{position:relative;background:#0d2137 center 32%/cover no-repeat;background-image:linear-gradient(180deg,rgba(13,33,55,.15) 0%,rgba(13,33,55,.55) 55%,rgba(13,33,55,.9) 100%),url('hero.jpg');border-radius:var(--r);padding:20px;color:#fff;box-shadow:var(--sh2);margin-bottom:16px;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end}
+.rhero{position:relative;background:#0d2137 center 42%/cover no-repeat;background-image:linear-gradient(180deg,rgba(13,33,55,.12) 0%,rgba(13,33,55,.5) 52%,rgba(13,33,55,.88) 100%),url('hero.jpg');border-radius:var(--r);padding:20px;color:#fff;box-shadow:var(--sh2);margin-bottom:16px;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end}
 .mapimg{width:100%;border-radius:var(--r);border:1px solid var(--border);display:block;cursor:zoom-in}
 .cmd{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#0d2137 0%,#0d7a6e 70%,#0284c7 125%);border-radius:var(--r);padding:20px 22px;color:#fff;box-shadow:var(--sh2);margin-bottom:16px}
 .cmd-eyebrow{font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;opacity:.72}
@@ -172,6 +172,11 @@ details .inner{padding:0 16px 16px}
 .tc-body{flex:1}
 .tc-title{font-size:15px;font-weight:800;color:var(--hd)}
 .tc-sub{font-size:12px;color:var(--muted);margin:2px 0 9px}
+.card.collapsible>.cohead{cursor:pointer;display:flex;align-items:center}
+.card.collapsible>.cohead::after{content:'▸';margin-left:auto;padding-left:8px;font-size:12px;color:var(--muted);transition:transform .2s;flex-shrink:0}
+.card.collapsible:not(.collapsed)>.cohead::after{transform:rotate(90deg)}
+.card.collapsed>*:not(.cohead){display:none}
+.card.collapsed>.cohead{margin-bottom:0}
 .kidrow{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--border)}
 .kidrow:last-child{border-bottom:none}
 .kidav{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;color:#fff}
@@ -374,6 +379,28 @@ a:hover{text-decoration:underline}
     <!-- TRAVEL -->
     <section class="page" id="travel">
       <div class="sectitle">Flights &amp; travel</div>
+
+      <div class="alert info">👪 Extended family (Ron, Paula, Blake, Andrea, Knox &amp; Zane) is on an <b>earlier flight</b>, arriving SJD ~9:00 AM — a few hours ahead of your 12:25 PM landing. Andrea has the airport transfers arranged both ways.</div>
+
+      <div class="card mb14">
+        <div class="ctitle">Travel-day overview</div>
+        <div class="tabs" style="margin-bottom:12px">
+          <button class="tab active" onclick="setTripDay('outbound',this)">Outbound day (Jun 27)</button>
+          <button class="tab" onclick="setTripDay('return',this)">Return day (Jul 3)</button>
+        </div>
+        <div id="tripdayCard"></div>
+      </div>
+
+      <div class="card mb14">
+        <div class="ctitle">Transfer details — confirm with Andrea</div>
+        <div class="g c2">
+          <div><label style="font-size:12px;color:var(--muted);font-weight:700">Transfer company</label><input data-txt="trCompany" placeholder="Add when received" style="margin-top:4px"></div>
+          <div><label style="font-size:12px;color:var(--muted);font-weight:700">SJD meeting point</label><input data-txt="trMeet" placeholder="Where to meet at SJD" style="margin-top:4px"></div>
+          <div><label style="font-size:12px;color:var(--muted);font-weight:700">Return pickup time @ resort</label><input data-txt="trReturn" value="8:00 AM target — confirm" style="margin-top:4px"></div>
+          <div><label style="font-size:12px;color:var(--muted);font-weight:700">Uber estimate (each way)</label><input data-txt="trUber" value="$65–$100 est." style="margin-top:4px"></div>
+        </div>
+      </div>
+
       <div class="card mb14">
         <div class="sh">
           <div><div style="font-size:22px;font-weight:800;color:var(--hd);letter-spacing:-.03em" id="flightNo">WN627</div><div style="font-size:13px;color:var(--muted);margin-top:1px" id="flightRoute">AUS → SJD</div></div>
@@ -386,24 +413,6 @@ a:hover{text-decoration:underline}
       </div>
       <div class="card mb14"><div class="ctitle">Seat assignments — Row 25 (same both ways)</div><div class="seat-grid" id="seatGrid"></div></div>
       <div class="card mb14"><div class="ctitle">Passenger details</div><div class="tw"><table><thead><tr><th>Name</th><th>Seat</th><th>Confirmation</th><th>Rapid Rewards</th><th>Docs</th></tr></thead><tbody id="passengerRows"></tbody></table></div></div>
-
-      <div class="alert info">👪 Extended family (Ron, Paula, Blake, Andrea, Knox &amp; Zane) is on an <b>earlier flight</b>, arriving SJD ~9:00 AM — a few hours ahead of your 12:25 PM landing. Andrea has the airport transfers arranged both ways.</div>
-
-      <div class="tabs">
-        <button class="tab active" onclick="setTripDay('outbound',this)">Outbound day (Jun 27)</button>
-        <button class="tab" onclick="setTripDay('return',this)">Return day (Jul 3)</button>
-      </div>
-      <div id="tripdayCard" class="mb14"></div>
-
-      <div class="card">
-        <div class="ctitle">Transfer details — confirm with Andrea</div>
-        <div class="g c2">
-          <div><label style="font-size:12px;color:var(--muted);font-weight:700">Transfer company</label><input data-txt="trCompany" placeholder="Add when received" style="margin-top:4px"></div>
-          <div><label style="font-size:12px;color:var(--muted);font-weight:700">SJD meeting point</label><input data-txt="trMeet" placeholder="Where to meet at SJD" style="margin-top:4px"></div>
-          <div><label style="font-size:12px;color:var(--muted);font-weight:700">Return pickup time @ resort</label><input data-txt="trReturn" value="8:00 AM target — confirm" style="margin-top:4px"></div>
-          <div><label style="font-size:12px;color:var(--muted);font-weight:700">Uber estimate (each way)</label><input data-txt="trUber" value="$65–$100 est." style="margin-top:4px"></div>
-        </div>
-      </div>
     </section>
 
     <!-- PACKING -->
@@ -734,6 +743,7 @@ function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classL
 function navTo(id){showPage(id,document.querySelector(`.navlink[onclick*="'${id}'"]`))}
 function daysUntil(){const x=Math.ceil((new Date('2026-06-27')-new Date())/86400000);const v=x>0?x:0;const e=document.getElementById('daysChip');if(e)e.textContent=v;const d=document.getElementById('dDays');if(d)d.textContent=v}
 function goShop(){navTo('packing');const b=[...document.querySelectorAll('#packing .subnav button')].find(x=>/Shopping/.test(x.textContent));subView('pack','shop',b)}
+function setupCollapsibles(){document.querySelectorAll('.card').forEach(card=>{if(card.classList.contains('kpi')||card.classList.contains('collapsible'))return;const head=card.firstElementChild;if(!head)return;if(!(head.classList.contains('ctitle')||head.classList.contains('sh')))return;card.classList.add('collapsible');head.classList.add('cohead');head.addEventListener('click',e=>{if(e.target.closest('button,a,input,select,textarea'))return;card.classList.toggle('collapsed')})})}
 function copyCode(code,btn){const orig=btn.textContent;navigator.clipboard.writeText(code).then(()=>{btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied')},2000)}).catch(()=>{const t=document.createElement('textarea');t.value=code;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);btn.textContent='Copied!';setTimeout(()=>btn.textContent=orig,2000)})}
 
 const passengers=[['Steven','25A Window','ACWDMM','113228581'],['Olive','25B Middle','ACWDMM','—'],['June','25C Aisle','ACWDMM','—'],['Gibson','25D Aisle','ACWDMM','—'],['Danielle','25E Middle','ACYITW','20602391143'],['Levon','25F Window','ACYITW','—']];
@@ -841,7 +851,7 @@ function toggleTheme(){const next=document.body.getAttribute('data-theme')==='da
 function exportData(){collectAll();const b=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='cabo2026_'+new Date().toISOString().slice(0,10)+'.json';a.click()}
 function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{data=merge(defaults,JSON.parse(ev.target.result));saveAll();alert('Imported!')}catch(err){alert('Import failed: '+err.message)}};r.readAsText(f)}
 
-document.addEventListener('DOMContentLoaded',()=>{applyTheme(localStorage.getItem('caboTheme')||'');renderAll();setFlight('outbound');setTripDay('outbound')});
+document.addEventListener('DOMContentLoaded',()=>{applyTheme(localStorage.getItem('caboTheme')||'');renderAll();setFlight('outbound');setTripDay('outbound');setupCollapsibles()});
 document.addEventListener('change',e=>{if(e.target.matches('input,select,textarea')&&!e.target.matches('[type=file]'))saveAll()});
 </script>
 </body>
